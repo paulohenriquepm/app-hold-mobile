@@ -48,6 +48,8 @@
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "react/jsx-no-constructed-context-values": "off",
+    "camelcase": "off",
+    "react/require-default-props": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
