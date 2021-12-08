@@ -45,7 +45,6 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
   const { signIn } = useAuth();
-
   const navigation = useNavigation();
 
   const {
@@ -108,6 +107,7 @@ const SignIn = () => {
               name="password"
               placeholder="Senha"
               iconName="lock"
+              autoCapitalize="none"
               error={errors.password && errors.password.message}
               secureTextEntry
             />

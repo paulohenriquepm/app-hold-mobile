@@ -6,7 +6,7 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: ${RFValue(48)}px;
+  height: ${RFValue(40)}px;
 
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: ${RFValue(8)}px;

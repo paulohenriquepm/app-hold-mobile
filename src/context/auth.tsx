@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 import { api } from '../api/api';
 
@@ -20,11 +21,17 @@ interface ISignInCredencials {
   email: string;
   password: string;
 }
+interface ISignUpCredencials {
+  name: string;
+  email: string;
+  password: string;
+}
 
 interface IAuthContextData {
   user: IUser;
   loading: boolean;
   signIn(credencials: ISignInCredencials): Promise<void>;
+  signUp(credencials: ISignUpCredencials): Promise<void>;
 }
 
 interface IAuthState {
@@ -85,8 +92,19 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
     [],
   );
 
+  const signUp = useCallback(
+    async ({ name, email, password }: ISignUpCredencials) => {
+      await api.post('/sessions/signup', {
+        name,
+        email,
+        password,
+      });
+    },
+    [],
+  );
+
   return (
-    <AuthContext.Provider value={{ user: data.user, loading, signIn }}>
+    <AuthContext.Provider value={{ user: data.user, loading, signIn, signUp }}>
       {children}
     </AuthContext.Provider>
   );
