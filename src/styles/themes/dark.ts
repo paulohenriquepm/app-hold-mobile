@@ -4,12 +4,19 @@ export default {
   title: 'dark',
 
   colors: {
-    primary: '#121212',
+    primary: '#0066FF',
     secondary: '#E5E5E5',
+    danger: '#EF233C',
 
-    background: '#FDFDFD',
+    background: '#121212',
+    title: '#fdfdfd',
     text: '#565656',
     subText: '#7C7C7C',
+    placeholder: '#565656',
+
+    buttonText: '#FDFDFD',
+    buttonGreyBorderColor: '#DCDCDC',
+    themeSwitcher: '#FDFDFD',
   },
 
   fonts: {

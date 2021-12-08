@@ -6,13 +6,15 @@ type ThemeType = {
     secondary: string;
     danger: string;
 
-    title: string;
     background: string;
+    title: string;
     text: string;
     subText: string;
+    placeholder: string;
 
     buttonText: string;
     buttonGreyBorderColor: string;
+    themeSwitcher: string;
   };
 
   fonts: {

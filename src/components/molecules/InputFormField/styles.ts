@@ -11,6 +11,7 @@ export const InputContainer = styled.View`
   align-items: center;
 
   flex-direction: row;
+  padding-bottom: ${RFValue(4)}px;
   border-bottom-width: ${RFValue(1)}px;
   border-bottom-color: ${({ theme }) => theme.colors.secondary};
 `;

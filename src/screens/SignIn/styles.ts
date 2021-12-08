@@ -5,6 +5,8 @@ export const Container = styled.View`
   height: 100%;
   width: 100%;
   padding: ${RFValue(48)}px;
+  position: relative;
+
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
@@ -12,6 +14,10 @@ export const Content = styled.ScrollView.attrs({
   keyboardShouldPersistTaps: 'handled',
   showsVerticalScrollIndicator: false,
 })``;
+
+export const LogoContainer = styled.View`
+  align-items: center;
+`;
 
 export const FormContainer = styled.View`
   flex: 1;
@@ -48,12 +54,12 @@ export const ButtonsContainer = styled.View`
 `;
 
 export const OrText = styled.Text`
-  margin: ${RFValue(8)}px 0;
+  margin: ${RFValue(10)}px 0;
   color: ${({ theme }) => theme.colors.subText};
 `;
 
 export const SignUpContainer = styled.View`
-  margin-top: ${RFValue(32)}px;
+  margin-top: ${RFValue(48)}px;
   flex-direction: row;
 
   align-items: center;

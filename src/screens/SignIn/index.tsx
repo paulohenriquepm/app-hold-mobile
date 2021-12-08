@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import { Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Title } from '../../components/atoms/Title';
-import { InputFormField } from '../../components/molecules/InputFormField';
 import SignInLogo from '../../../assets/sign-in.svg';
+import { useAuth } from '../../context/auth';
 import AppButton from '../../components/atoms/AppButton';
 import GoogleButton from '../../components/atoms/GoogleButton';
+import { Title } from '../../components/atoms/Title';
+import { InputFormField } from '../../components/molecules/InputFormField';
+import { ThemeSwitcher } from '../../components/molecules/ThemeSwitcher';
 
 import {
   Container,
   Content,
+  LogoContainer,
   FormContainer,
   TitleFormContainer,
   TitleFormEmailContainer,
@@ -22,15 +29,65 @@ import {
   SignUpText,
 } from './styles';
 
+interface FormData {
+  email: string;
+  password: string;
+}
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email('O e-mail é inválido')
+    .required('O e-mail é obrigatório'),
+  password: Yup.string().required('A senha é obrigatória'),
+});
+
 const SignIn = () => {
-  const { control } = useForm();
+  const [loading, setLoading] = useState(false);
+
+  const { signIn } = useAuth();
+
+  const navigation = useNavigation();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handleSignIn = useCallback(
+    async (formData: FormData) => {
+      try {
+        setLoading(true);
+
+        await signIn({
+          email: formData.email,
+          password: formData.password,
+        });
+      } catch (error: unknown) {
+        Alert.alert(
+          'Erro na autenticação',
+          error?.response?.data?.message ||
+            'Falha na autenticação, cheque as credenciais.',
+        );
+      } finally {
+        setLoading(false);
+      }
+    },
+    [signIn],
+  );
 
   return (
     <Container>
-      <Content>
-        <FormContainer>
-          <SignInLogo width={280} height={280} />
+      <ThemeSwitcher />
 
+      <Content>
+        <LogoContainer>
+          <SignInLogo width={270} height={270} />
+        </LogoContainer>
+
+        <FormContainer>
           <TitleFormContainer>
             <Title>Entrar</Title>
           </TitleFormContainer>
@@ -41,6 +98,8 @@ const SignIn = () => {
               name="email"
               placeholder="E-mail"
               iconName="at-sign"
+              autoCapitalize="none"
+              error={errors.email && errors.email.message}
             />
           </TitleFormEmailContainer>
           <TitleFormPasswordContainer>
@@ -49,6 +108,7 @@ const SignIn = () => {
               name="password"
               placeholder="Senha"
               iconName="lock"
+              error={errors.password && errors.password.message}
               secureTextEntry
             />
           </TitleFormPasswordContainer>
@@ -56,7 +116,11 @@ const SignIn = () => {
           <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
 
           <ButtonsContainer>
-            <AppButton title="entrar" loading={false}>
+            <AppButton
+              title="entrar"
+              onPress={handleSubmit(handleSignIn)}
+              loading={loading}
+            >
               Entrar
             </AppButton>
 
@@ -69,7 +133,9 @@ const SignIn = () => {
         <SignUpContainer>
           <NewToAppHoldText>Novo no App&Hold?</NewToAppHoldText>
 
-          <SignUpText>Cadastrar</SignUpText>
+          <SignUpText onPress={() => navigation.navigate('SignUp')}>
+            Cadastrar
+          </SignUpText>
         </SignUpContainer>
       </Content>
     </Container>

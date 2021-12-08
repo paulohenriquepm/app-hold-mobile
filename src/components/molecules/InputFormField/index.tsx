@@ -1,6 +1,7 @@
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { TextInputProps } from 'react-native';
+import { useTheme } from 'styled-components';
 
 import { Icon } from '../../atoms/Icon';
 
@@ -20,6 +21,8 @@ const InputFormField = ({
   iconName,
   ...rest
 }: InputFormFieldProps) => {
+  const { colors } = useTheme();
+
   return (
     <Container>
       <Controller
@@ -27,8 +30,13 @@ const InputFormField = ({
         name={name}
         render={({ field: { onChange, value } }) => (
           <InputContainer>
-            {iconName && <Icon color="#565656" name={iconName} />}
-            <InputText onChangeText={onChange} value={value} {...rest} />
+            {iconName && <Icon color={colors.placeholder} name={iconName} />}
+            <InputText
+              onChangeText={onChange}
+              value={value}
+              placeholderTextColor={colors.placeholder}
+              {...rest}
+            />
           </InputContainer>
         )}
       />
