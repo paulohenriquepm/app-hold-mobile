@@ -3,7 +3,7 @@ import { Control, Controller } from 'react-hook-form';
 import { TextInputProps } from 'react-native';
 import { useTheme } from 'styled-components';
 
-import { Icon } from '../../atoms/Icon';
+import { Icon } from '../Icon';
 
 import { Container, InputText, InputContainer, ErrorText } from './styles';
 

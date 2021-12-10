@@ -1,7 +1,7 @@
 import React from 'react';
 import { RectButtonProperties } from 'react-native-gesture-handler';
 
-import GoogleLogo from '../../../../assets/google.svg';
+import GoogleLogo from '../../../assets/google.svg';
 
 import { Container, Button } from './styles';
 
@@ -15,4 +15,4 @@ const GoogleButton = ({ ...rest }: RectButtonProperties) => {
   );
 };
 
-export default GoogleButton;
+export { GoogleButton };

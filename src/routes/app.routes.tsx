@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { AssetList } from '../screens/AssetList';
-import { Icon } from '../components/atoms/Icon';
+import { Icon } from '../components/Icon';
 import { useThemeContext } from '../context/theme';
 
 const { Navigator, Screen } = createBottomTabNavigator();

@@ -31,4 +31,4 @@ const AppButton = ({
   );
 };
 
-export default AppButton;
+export { AppButton };

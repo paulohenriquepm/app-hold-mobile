@@ -7,11 +7,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import SignUpLogo from '../../../assets/sign-up.svg';
 import { useAuth } from '../../context/auth';
-import AppButton from '../../components/atoms/AppButton';
-import GoogleButton from '../../components/atoms/GoogleButton';
-import { Title } from '../../components/atoms/Title';
-import { InputFormField } from '../../components/molecules/InputFormField';
-import { ThemeSwitcher } from '../../components/molecules/ThemeSwitcher';
+import { AppButton } from '../../components/AppButton';
+import { GoogleButton } from '../../components/GoogleButton';
+import { Title } from '../../components/Title';
+import { InputFormField } from '../../components/InputFormField';
+import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 
 import {
   Container,

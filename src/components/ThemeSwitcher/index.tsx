@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useThemeContext } from '../../../context/theme';
-import { Icon } from '../../atoms/Icon';
+import { useThemeContext } from '../../context/theme';
+import { Icon } from '../Icon';
 
 import { Container } from './style';
 
