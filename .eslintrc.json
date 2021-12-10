@@ -50,6 +50,7 @@
     "react/jsx-no-constructed-context-values": "off",
     "camelcase": "off",
     "react/require-default-props": "off",
+    "react/no-unstable-nested-components": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
