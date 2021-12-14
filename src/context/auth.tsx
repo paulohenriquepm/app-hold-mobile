@@ -77,6 +77,12 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
     loadStoragedData();
   }, []);
 
+  const signOut = useCallback(async () => {
+    await AsyncStorage.multiRemove(['@apphold:token', '@apphold:user']);
+
+    setData({} as IAuthState);
+  }, []);
+
   const signIn = useCallback(
     async ({ email, password }: ISignInCredencials) => {
       const response = await api.post('/sessions/signin', {
@@ -99,6 +105,17 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
       });
     },
     [],
+  );
+
+  api.interceptors.response.use(
+    response => response,
+    async err => {
+      if (err.response.status === 401 || err.response.status === 403) {
+        signOut();
+      }
+
+      throw err;
+    },
   );
 
   // const signInWithGoogle = useCallback(async () => {
