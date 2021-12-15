@@ -14,7 +14,7 @@ import { api } from '../api/api';
 // const { CLIENT_ID } = process.env;
 // const { REDIRECT_URI } = process.env;
 interface IUser {
-  id: string;
+  id: number;
   name: string;
   email: string;
 }
@@ -29,11 +29,20 @@ interface ISignUpCredencials {
   password: string;
 }
 
+interface IUpdateUserData {
+  name: string;
+  email: string;
+  old_password?: string;
+  new_password?: string;
+}
+
 interface IAuthContextData {
   user: IUser;
   loading: boolean;
   signIn(credencials: ISignInCredencials): Promise<void>;
   signUp(credencials: ISignUpCredencials): Promise<void>;
+  updateUser(dataToUpdate: IUpdateUserData): Promise<void>;
+  signOut(): Promise<void>;
 }
 
 interface IAuthState {
@@ -157,8 +166,22 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
     [],
   );
 
+  const updateUser = useCallback(
+    async (dataToUpdate: IUpdateUserData) => {
+      const updatedUser = await api.put(
+        `/users/update/${data.user.id}`,
+        dataToUpdate,
+      );
+
+      await AsyncStorage.setItem('@apphold:user', JSON.stringify(updatedUser));
+    },
+    [data.user.id],
+  );
+
   return (
-    <AuthContext.Provider value={{ user: data.user, loading, signIn, signUp }}>
+    <AuthContext.Provider
+      value={{ user: data.user, loading, signIn, signUp, updateUser, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

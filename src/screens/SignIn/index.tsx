@@ -29,7 +29,7 @@ import {
   SignUpText,
 } from './styles';
 
-interface FormData {
+interface IFormData {
   email: string;
   password: string;
 }
@@ -56,7 +56,7 @@ const SignIn = () => {
   });
 
   const handleSignIn = useCallback(
-    async (formData: FormData) => {
+    async (formData: IFormData) => {
       try {
         setLoading(true);
 
@@ -66,9 +66,9 @@ const SignIn = () => {
         });
       } catch (error: unknown) {
         Alert.alert(
-          'Erro na autenticação',
+          'Erro ao autenticar',
           error?.response?.data?.message ||
-            'Falha na autenticação, cheque as credenciais.',
+            'Ocorreu um erro durante a autenticação, por favor, cheque as credenciais e tente novamente.',
         );
       } finally {
         setLoading(false);

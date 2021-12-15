@@ -51,7 +51,7 @@ const AssetList = () => {
         Alert.alert(
           'Erro ao listar ativos',
           error?.response?.data?.message ||
-            'Falha ao listar os ativos, tente novamente',
+            'Ocorreu um erro ao listar os ativos, por favor, tente novamente',
         );
       } finally {
         setLoading(false);
