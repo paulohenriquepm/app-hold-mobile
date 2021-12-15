@@ -26,7 +26,7 @@ import {
   SignInText,
 } from './styles';
 
-interface FormData {
+interface IFormData {
   name: string;
   email: string;
   password: string;
@@ -58,7 +58,7 @@ const SignUp = () => {
   });
 
   const handleSignIn = useCallback(
-    async (formData: FormData) => {
+    async (formData: IFormData) => {
       try {
         setLoading(true);
 
@@ -76,9 +76,9 @@ const SignUp = () => {
         );
       } catch (error: unknown) {
         Alert.alert(
-          'Erro no cadastro',
+          'Erro ao cadastrar',
           error?.response?.data?.message ||
-            'Falha ao cadastrar, teste novamente.',
+            'Ocorreu um durante o cadastro, por favor, tente novamente.',
         );
       } finally {
         setLoading(false);
