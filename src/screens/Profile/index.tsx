@@ -21,6 +21,7 @@ import {
   FormPasswordInfoContainer,
   ButtonsContainer,
 } from './styles';
+import { api } from '../../api/api';
 
 interface IFormData {
   name: string;
@@ -53,7 +54,7 @@ const schema = Yup.object().shape({
 const Profile = () => {
   const [loading, setLoading] = useState(false);
 
-  const { user, signOut, updateUser } = useAuth();
+  const { user, signOut, updateUserDataStorage } = useAuth();
   const { colors } = useTheme();
 
   const {
@@ -76,7 +77,9 @@ const Profile = () => {
       try {
         setLoading(true);
 
-        await updateUser(formData);
+        const response = await api.put(`/users/update/${user.id}`, formData);
+
+        await updateUserDataStorage(response.data);
 
         Alert.alert('Sucesso!', 'Seus dados foram atualizados com sucesso!');
       } catch (error: unknown) {
@@ -89,7 +92,7 @@ const Profile = () => {
         setLoading(false);
       }
     },
-    [updateUser],
+    [updateUserDataStorage, user.id],
   );
 
   return (

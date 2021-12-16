@@ -41,7 +41,7 @@ interface IAuthContextData {
   loading: boolean;
   signIn(credencials: ISignInCredencials): Promise<void>;
   signUp(credencials: ISignUpCredencials): Promise<void>;
-  updateUser(dataToUpdate: IUpdateUserData): Promise<void>;
+  updateUserDataStorage(dataToUpdate: IUpdateUserData): Promise<void>;
   signOut(): Promise<void>;
 }
 
@@ -166,21 +166,23 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
     [],
   );
 
-  const updateUser = useCallback(
+  const updateUserDataStorage = useCallback(
     async (dataToUpdate: IUpdateUserData) => {
-      const updatedUser = await api.put(
-        `/users/update/${data.user.id}`,
-        dataToUpdate,
-      );
-
-      await AsyncStorage.setItem('@apphold:user', JSON.stringify(updatedUser));
+      await AsyncStorage.setItem('@apphold:user', JSON.stringify(dataToUpdate));
     },
-    [data.user.id],
+    [],
   );
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, loading, signIn, signUp, updateUser, signOut }}
+      value={{
+        user: data.user,
+        loading,
+        signIn,
+        signUp,
+        updateUserDataStorage,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>
