@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from '../components/Icon';
 import { useThemeContext } from '../context/theme';
 import { AssetList } from '../screens/AssetList';
+import { Calculator } from '../screens/Calculator';
 import { Profile } from '../screens/Profile';
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -16,12 +17,32 @@ const AppRoutes = () => {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
+        tabBarHideOnKeyboard: true,
       }}
       initialRouteName="AssetList"
     >
       <Screen
         name="Ativos"
         component={AssetList}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <Icon
+                name="list"
+                size={24}
+                color={
+                  focused
+                    ? currentTheme.colors.primary
+                    : currentTheme.colors.themeSwitcher
+                }
+              />
+            );
+          },
+        }}
+      />
+      <Screen
+        name="Calculadora"
+        component={Calculator}
         options={{
           tabBarIcon: ({ focused }) => {
             return (

@@ -2,22 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
 import { api } from '../../api/api';
+import { AssetItem } from '../../components/AssetItem';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { Title } from '../../components/Title';
 
-import {
-  Container,
-  Content,
-  Header,
-  AssetListContainer,
-  Asset,
-  AssetInfo,
-  AssetName,
-  AssetSector,
-  AssetLogo,
-} from './styles';
+import { Container, Content, Header, AssetListContainer } from './styles';
 
 interface IAsset {
+  id: number;
   name: string;
   b3_ticket: string;
   sector: string;
@@ -76,15 +68,7 @@ const AssetList = () => {
 
         <AssetListContainer>
           {assetList.map(asset => (
-            <Asset>
-              <AssetInfo>
-                <AssetName>
-                  {asset.name} - {asset.b3_ticket}
-                </AssetName>
-                <AssetSector>{asset.sector}</AssetSector>
-              </AssetInfo>
-              <AssetLogo source={{ uri: asset.logo }} />
-            </Asset>
+            <AssetItem key={asset.id} asset={asset} />
           ))}
         </AssetListContainer>
       </Content>

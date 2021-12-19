@@ -10,6 +10,7 @@ import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { Title } from '../../components/Title';
 import { InputFormField } from '../../components/InputFormField';
 import { AppButton } from '../../components/AppButton';
+import { api } from '../../api/api';
 
 import {
   Container,
@@ -21,7 +22,6 @@ import {
   FormPasswordInfoContainer,
   ButtonsContainer,
 } from './styles';
-import { api } from '../../api/api';
 
 interface IFormData {
   name: string;
