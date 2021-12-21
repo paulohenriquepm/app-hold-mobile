@@ -4,6 +4,10 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 interface ContainerProps {
   backgroundColor: string;
+  selected: boolean;
+}
+interface ButtonTextProps {
+  selected: boolean;
 }
 
 export const Container = styled(RectButton)<ContainerProps>`
@@ -12,12 +16,14 @@ export const Container = styled(RectButton)<ContainerProps>`
   width: 100%;
   height: ${RFValue(40)}px;
 
-  background-color: ${({ backgroundColor }) => backgroundColor};
+  background-color: ${({ backgroundColor, selected, theme }) =>
+    selected ? backgroundColor : theme.colors.secondary};
   border-radius: ${RFValue(8)}px;
 `;
 
-export const ButtonText = styled.Text`
-  color: ${({ theme }) => theme.colors.buttonText};
+export const ButtonText = styled.Text<ButtonTextProps>`
+  color: ${({ selected, theme }) =>
+    selected ? theme.colors.buttonText : theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(16)}px;
 `;

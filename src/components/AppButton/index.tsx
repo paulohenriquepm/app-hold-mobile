@@ -10,22 +10,24 @@ interface ButtonProps extends RectButtonProperties {
   title: string;
   loading?: boolean;
   background?: string;
+  selected?: boolean;
 }
 
 const AppButton = ({
   children,
   loading,
   background = '#0066FF',
+  selected = true,
   ...rest
 }: ButtonProps) => {
   const { colors } = useTheme();
 
   return (
-    <Container backgroundColor={background} {...rest}>
+    <Container backgroundColor={background} selected={selected} {...rest}>
       {loading ? (
         <ActivityIndicator size="small" color={colors.background} />
       ) : (
-        <ButtonText>{children}</ButtonText>
+        <ButtonText selected={selected}>{children}</ButtonText>
       )}
     </Container>
   );

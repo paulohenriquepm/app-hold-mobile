@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { api } from '../../api/api';
 import { AssetItem } from '../../components/AssetItem';
@@ -19,6 +20,8 @@ interface IAsset {
 const AssetList = () => {
   const [assetList, setAssetList] = useState<IAsset[]>([] as IAsset[]);
   const [loading, setLoading] = useState(false);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function loadAssets() {
@@ -53,6 +56,13 @@ const AssetList = () => {
     loadAssets();
   }, []);
 
+  const handleNavigateToAssetDetails = useCallback(
+    (asset_id: number) => {
+      navigation.navigate('AssetDetails', { assetId: asset_id });
+    },
+    [navigation],
+  );
+
   if (loading) {
     return <Title>Loading...</Title>;
   }
@@ -68,7 +78,12 @@ const AssetList = () => {
 
         <AssetListContainer>
           {assetList.map(asset => (
-            <AssetItem key={asset.id} asset={asset} />
+            <AssetItem
+              key={asset.id}
+              onPress={() => handleNavigateToAssetDetails(asset.id)}
+              title={asset.name}
+              asset={asset}
+            />
           ))}
         </AssetListContainer>
       </Content>

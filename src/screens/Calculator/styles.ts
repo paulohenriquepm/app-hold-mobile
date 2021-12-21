@@ -5,7 +5,7 @@ import CurrencyInput from 'react-native-currency-input';
 export const Container = styled.View`
   height: 100%;
   width: 100%;
-  padding: ${RFValue(48)}px;
+  padding: ${RFValue(48)}px ${RFValue(40)}px ${RFValue(32)}px ${RFValue(40)}px;
 
   background-color: ${({ theme }) => theme.colors.background};
 `;

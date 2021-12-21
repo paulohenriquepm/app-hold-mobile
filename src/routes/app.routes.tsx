@@ -1,19 +1,35 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import { Icon } from '../components/Icon';
 import { useThemeContext } from '../context/theme';
 import { AssetList } from '../screens/AssetList';
+import { AssetDetails } from '../screens/AssetDetails';
 import { Calculator } from '../screens/Calculator';
 import { Profile } from '../screens/Profile';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const AssetListRoutes = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="AssetList" component={AssetList} />
+      <Stack.Screen name="AssetDetails" component={AssetDetails} />
+    </Stack.Navigator>
+  );
+};
 
 const AppRoutes = () => {
   const { currentTheme } = useThemeContext();
 
   return (
-    <Navigator
+    <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
@@ -21,9 +37,9 @@ const AppRoutes = () => {
       }}
       initialRouteName="AssetList"
     >
-      <Screen
+      <Tab.Screen
         name="Ativos"
-        component={AssetList}
+        component={AssetListRoutes}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -40,7 +56,7 @@ const AppRoutes = () => {
           },
         }}
       />
-      <Screen
+      <Tab.Screen
         name="Calculadora"
         component={Calculator}
         options={{
@@ -59,7 +75,7 @@ const AppRoutes = () => {
           },
         }}
       />
-      <Screen
+      <Tab.Screen
         name="Perfil"
         component={Profile}
         options={{
@@ -78,7 +94,7 @@ const AppRoutes = () => {
           },
         }}
       />
-    </Navigator>
+    </Tab.Navigator>
   );
 };
 
