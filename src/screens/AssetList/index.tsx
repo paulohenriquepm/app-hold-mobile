@@ -35,6 +35,7 @@ const AssetList = () => {
         });
 
         const mappedAssetList = response.data.map((asset: IAsset) => ({
+          id: asset.id,
           name: asset.name,
           b3_ticket: asset.b3_ticket,
           sector: asset.sector,

@@ -13,10 +13,14 @@ import { api } from '../api/api';
 
 // const { CLIENT_ID } = process.env;
 // const { REDIRECT_URI } = process.env;
+
 interface IUser {
   id: number;
   name: string;
   email: string;
+  wallet: {
+    id: number;
+  };
 }
 
 interface ISignInCredencials {

@@ -50,7 +50,7 @@ export const AssetProfileContainer = styled.View`
   padding: ${RFValue(4)}px ${RFValue(8)}px;
   background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: ${RFValue(4)}px;
-  margin-bottom: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(16)}px;
 `;
 
 export const Field = styled.View`
@@ -69,11 +69,16 @@ export const FieldValue = styled.Text`
   font-size: ${RFValue(12)}px;
 `;
 
+export const AssetFinancialScrollView = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})``;
+
 export const AssetFinancialContainer = styled.View`
   padding: ${RFValue(4)}px ${RFValue(8)}px;
   background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: ${RFValue(4)}px;
-  margin-bottom: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(16)}px;
+  height: ${RFValue(167)}px;
 `;
 
 export const SeasonalityContainer = styled.View`
@@ -86,7 +91,7 @@ export const PickerWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.primary};
   padding: ${RFValue(4)}px;
   border-radius: ${RFValue(8)}px;
-  margin-bottom: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(16)}px;
 `;
 
 export const PickerContainer = styled(Picker)`
