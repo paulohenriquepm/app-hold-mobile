@@ -77,7 +77,7 @@ const Profile = () => {
       try {
         setLoading(true);
 
-        const response = await api.put(`/users/update/${user.id}`, formData);
+        const response = await api.put(`/users/${user.id}`, formData);
 
         await updateUserDataStorage(response.data);
 
