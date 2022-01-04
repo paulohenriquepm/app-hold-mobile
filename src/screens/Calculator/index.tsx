@@ -21,6 +21,7 @@ import {
 } from './styles';
 
 export interface IFilterAsset {
+  id: number;
   name: string;
   b3_ticket: string;
   sector: string;
@@ -82,7 +83,7 @@ const Calculator = () => {
           <Title>Calculadora de dividendos</Title>
         </Header>
 
-        <AssetsSearchInputField setSelectedAsset={setSelectedAsset} />
+        <AssetsSearchInputField top={100} setSelectedAsset={setSelectedAsset} />
 
         {Object.keys(selectedAsset).length > 0 && (
           <>

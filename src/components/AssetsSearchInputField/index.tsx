@@ -21,10 +21,14 @@ interface IFilterAssetResponse {
 
 interface IAssetSearchInputFieldProps extends ViewProps {
   setSelectedAsset: Dispatch<SetStateAction<IFilterAsset>>;
+  top: number;
+  functionToExecute?: () => void;
 }
 
 const AssetsSearchInputField = ({
   setSelectedAsset,
+  top,
+  functionToExecute,
   ...rest
 }: IAssetSearchInputFieldProps) => {
   const [filteredAssets, setFilteredAssets] = useState<IFilterAsset[]>([]);
@@ -50,6 +54,7 @@ const AssetsSearchInputField = ({
 
     const mappedFilteredAssets = response.data.map(asset => {
       return {
+        id: asset.id,
         name: asset.name,
         b3_ticket: asset.b3_ticket,
         sector: asset.sector,
@@ -69,12 +74,15 @@ const AssetsSearchInputField = ({
       setSelectedAsset(asset);
 
       setFilteredAssets([]);
+      if (functionToExecute) {
+        functionToExecute();
+      }
     },
-    [setSelectedAsset],
+    [setSelectedAsset, functionToExecute],
   );
 
   return (
-    <Container {...rest}>
+    <Container top={top} {...rest}>
       <SearchInputContainer>
         <TextInputField
           minLength={1}

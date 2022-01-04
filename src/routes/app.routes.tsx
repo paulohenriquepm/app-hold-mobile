@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from '../components/Icon';
 import { useThemeContext } from '../context/theme';
 import { AssetList } from '../screens/AssetList';
+import { MyWallet } from '../screens/MyWallet';
 import { AssetDetails } from '../screens/AssetDetails';
 import { Calculator } from '../screens/Calculator';
 import { Profile } from '../screens/Profile';
@@ -45,6 +46,25 @@ const AppRoutes = () => {
             return (
               <Icon
                 name="list"
+                size={24}
+                color={
+                  focused
+                    ? currentTheme.colors.primary
+                    : currentTheme.colors.themeSwitcher
+                }
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Minha Carteira"
+        component={MyWallet}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <Icon
+                name="folder"
                 size={24}
                 color={
                   focused

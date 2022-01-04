@@ -1,11 +1,14 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import DelayInput from 'react-native-debounce-input';
+interface ContainerProps {
+  top: number;
+}
 
-export const Container = styled.View`
+export const Container = styled.View<ContainerProps>`
   position: absolute;
   width: 100%;
-  top: ${RFValue(100)}px;
+  top: ${({ top }) => RFValue(top)}px;
   z-index: 1;
 `;
 
