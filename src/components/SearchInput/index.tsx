@@ -3,17 +3,17 @@ import { ViewProps, ActivityIndicator } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import { api } from '../../api/api';
-import { IFilterAsset } from '../../screens/Calculator';
+import { IAsset } from '../../screens/AssetList';
 import { Icon } from '../Icon';
 
 import { SearchInputContainer, TextInputField } from './styles';
 
 interface IFilterAssetResponse {
-  data: IFilterAsset[];
+  data: IAsset[];
 }
 
 interface IAssetSearchInputFieldProps extends ViewProps {
-  setFilteredAssets: Dispatch<SetStateAction<IFilterAsset[]>>;
+  setFilteredAssets: Dispatch<SetStateAction<IAsset[]>>;
 }
 
 const SearchInput = ({

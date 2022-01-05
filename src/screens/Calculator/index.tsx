@@ -6,6 +6,7 @@ import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { Title } from '../../components/Title';
 import { AssetsSearchInputField } from '../../components/AssetsSearchInputField';
 import { SubTitle } from '../../components/SubTitle';
+import { IAsset } from '../AssetList';
 
 import {
   Container,
@@ -20,27 +21,14 @@ import {
   ExplanationText,
 } from './styles';
 
-export interface IFilterAsset {
-  id: number;
-  name: string;
-  b3_ticket: string;
-  sector: string;
-  logo: string;
-  last_12_months_dividends: number;
-  total_stocks: number;
-  price: number;
-}
-
 const Calculator = () => {
   const [dividendWantedValue, setDividendWantedValue] = useState(0);
   const [totalAmountToBuy, setTotalAmountToBuy] = useState('');
   const [totalAmountToBuyInStocks, setTotalAmountToBuyInStocks] = useState('');
-  const [selectedAsset, setSelectedAsset] = useState<IFilterAsset>(
-    {} as IFilterAsset,
-  );
+  const [selectedAsset, setSelectedAsset] = useState<IAsset>({} as IAsset);
 
   const calculateAmount = useCallback(
-    (dividendValue: number, asset: IFilterAsset) => {
+    (dividendValue: number, asset: IAsset) => {
       const dividendPerStock =
         selectedAsset.last_12_months_dividends /
         12 /

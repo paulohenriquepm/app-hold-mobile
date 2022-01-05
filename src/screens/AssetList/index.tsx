@@ -7,15 +7,19 @@ import { AssetItem } from '../../components/AssetItem';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { Title } from '../../components/Title';
 import { waitPromise } from '../../utils/waitPromise';
+import { SearchInput } from '../../components/SearchInput';
 
 import { Container, Content, Header, AssetListContainer } from './styles';
 
-interface IAsset {
+export interface IAsset {
   id: number;
   name: string;
   b3_ticket: string;
   sector: string;
   logo: string;
+  last_12_months_dividends: number;
+  total_stocks: number;
+  price: number;
 }
 
 const AssetList = () => {
@@ -86,6 +90,7 @@ const AssetList = () => {
       >
         <Header>
           <Title>Ativos</Title>
+          <SearchInput />
         </Header>
 
         <AssetListContainer>

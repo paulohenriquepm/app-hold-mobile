@@ -7,7 +7,7 @@ import { useAuth } from '../../../context/auth';
 import { AssetsSearchInputField } from '../../../components/AssetsSearchInputField';
 import { Icon } from '../../../components/Icon';
 import { Title } from '../../../components/Title';
-import { IFilterAsset } from '../../Calculator';
+import { IAsset } from '../../AssetList';
 
 import { CloseModalButton, Container, Content, Header } from './styles';
 
@@ -22,9 +22,7 @@ const AddToWallet: React.FC<AddToWalletProps> = ({
   toggleModal,
   functionToExecute,
 }) => {
-  const [selectedAsset, setSelectedAsset] = useState<IFilterAsset>(
-    {} as IFilterAsset,
-  );
+  const [selectedAsset, setSelectedAsset] = useState<IAsset>({} as IAsset);
 
   const { user } = useAuth();
 
@@ -42,7 +40,7 @@ const AddToWallet: React.FC<AddToWalletProps> = ({
           `${selectedAsset.name} foi adicionado com sucesso à sua carteira!`,
         );
 
-        setSelectedAsset({} as IFilterAsset);
+        setSelectedAsset({} as IAsset);
       } catch (error: unknown) {
         Alert.alert(
           'Erro ao adicionar ativo',

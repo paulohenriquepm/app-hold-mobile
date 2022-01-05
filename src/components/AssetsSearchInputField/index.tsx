@@ -1,20 +1,14 @@
 import React, { useState, useCallback, Dispatch, SetStateAction } from 'react';
 import { ViewProps, StyleSheet } from 'react-native';
-import { useTheme } from 'styled-components';
 
-import { api } from '../../api/api';
-import { IFilterAsset } from '../../screens/Calculator';
+import { IAsset } from '../../screens/AssetList';
 import { AssetItem } from '../AssetItem';
 import { SearchInput } from '../SearchInput';
 
 import { Container, ResultsContainer, ResultsList } from './styles';
 
-interface IFilterAssetResponse {
-  data: IFilterAsset[];
-}
-
 interface IAssetSearchInputFieldProps extends ViewProps {
-  setSelectedAsset: Dispatch<SetStateAction<IFilterAsset>>;
+  setSelectedAsset: Dispatch<SetStateAction<IAsset>>;
   top: number;
   functionToExecute?: () => void;
 }
@@ -25,10 +19,10 @@ const AssetsSearchInputField = ({
   functionToExecute,
   ...rest
 }: IAssetSearchInputFieldProps) => {
-  const [filteredAssets, setFilteredAssets] = useState<IFilterAsset[]>([]);
+  const [filteredAssets, setFilteredAssets] = useState<IAsset[]>([]);
 
   const handleSelectAsset = useCallback(
-    (asset: IFilterAsset) => {
+    (asset: IAsset) => {
       setSelectedAsset(asset);
 
       setFilteredAssets([]);
