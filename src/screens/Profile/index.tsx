@@ -21,6 +21,7 @@ import {
   FormInputContainer,
   FormPasswordInfoContainer,
   ButtonsContainer,
+  DeleteAccountButton,
 } from './styles';
 
 interface IFormData {
@@ -94,6 +95,39 @@ const Profile = () => {
     },
     [updateUserDataStorage, user.id],
   );
+
+  const handleDeleteAccount = useCallback(async () => {
+    try {
+      await api.delete(`/users/${user.id}`);
+
+      Alert.alert('Sucesso', 'Seus dados foram excluidos com sucesso.');
+
+      signOut();
+    } catch (error: unknown) {
+      Alert.alert(
+        'Erro ao excluir sua conta',
+        error?.response?.data?.message ||
+          'Ocorreu um erro ao excluir seus dados, por favor, tente novamente.',
+      );
+    }
+  }, [user.id, signOut]);
+
+  const handleOpenDeleteAccountAlertDialong = useCallback(() => {
+    Alert.alert(
+      'Atenção!',
+      'Deseja realmente excluir sua conta? Todos os dados serão excluídos e não poderão ser recuperados.',
+      [
+        {
+          text: 'Não',
+          style: 'cancel',
+        },
+        {
+          text: 'Sim, excluir minha conta',
+          onPress: handleDeleteAccount,
+        },
+      ],
+    );
+  }, [handleDeleteAccount]);
 
   return (
     <Container>
@@ -171,7 +205,7 @@ const Profile = () => {
         <ButtonsContainer>
           <AppButton
             style={{ marginBottom: 8 }}
-            title="atualizar"
+            title="atualizar minha conta"
             onPress={handleSubmit(handleUpdateUser)}
             loading={loading}
           >
@@ -180,6 +214,14 @@ const Profile = () => {
           <AppButton title="sair" background={colors.danger} onPress={signOut}>
             Sair do App&Hold
           </AppButton>
+
+          <DeleteAccountButton
+            title="excluir minha conta"
+            background={colors.danger}
+            onPress={handleOpenDeleteAccountAlertDialong}
+          >
+            Excluir minha conta
+          </DeleteAccountButton>
         </ButtonsContainer>
       </Content>
     </Container>

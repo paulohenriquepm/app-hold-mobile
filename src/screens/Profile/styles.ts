@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+import { AppButton } from '../../components/AppButton';
+
 export const Container = styled.View`
   height: 100%;
   width: 100%;
@@ -35,3 +37,7 @@ export const FormInputContainer = styled.View`
 `;
 
 export const ButtonsContainer = styled.View``;
+
+export const DeleteAccountButton = styled(AppButton)`
+  margin-top: ${RFValue(48)}px;
+`;
