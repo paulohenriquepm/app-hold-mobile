@@ -12,7 +12,7 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  margin-bottom: ${RFValue(64)}px;
+  margin-bottom: ${RFValue(32)}px;
 `;
 
 export const Content = styled.ScrollView.attrs({

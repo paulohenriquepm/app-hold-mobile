@@ -6,6 +6,7 @@ import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { Title } from '../../components/Title';
 import { api } from '../../api/api';
 import { useAuth } from '../../context/auth';
+import { waitPromise } from '../../utils/waitPromise';
 
 import { AddToWallet } from './AddToWallet';
 import { EditWalletQuantity } from './EditWalletQuantity';
@@ -63,10 +64,6 @@ const calculatePatrimonyInPercentage = (
   ).toFixed(2)}%`;
 };
 
-const wait = (timeout: number) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-};
-
 const MyWallet = () => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -121,7 +118,7 @@ const MyWallet = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    wait(1000).then(() => setRefreshing(false));
+    waitPromise(1000).then(() => setRefreshing(false));
   }, []);
 
   const handleToggleShowAddToWalletSearching = useCallback(() => {

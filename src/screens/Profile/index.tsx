@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Alert } from 'react-native';
+import { Alert, RefreshControl } from 'react-native';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,6 +11,7 @@ import { Title } from '../../components/Title';
 import { InputFormField } from '../../components/InputFormField';
 import { AppButton } from '../../components/AppButton';
 import { api } from '../../api/api';
+import { waitPromise } from '../../utils/waitPromise';
 
 import {
   Container,
@@ -54,6 +55,7 @@ const schema = Yup.object().shape({
 
 const Profile = () => {
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const { user, signOut, updateUserDataStorage } = useAuth();
   const { colors } = useTheme();
@@ -73,6 +75,11 @@ const Profile = () => {
     },
   });
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    waitPromise(1000).then(() => setRefreshing(false));
+  }, []);
+
   const handleUpdateUser = useCallback(
     async (formData: IFormData) => {
       try {
@@ -81,6 +88,7 @@ const Profile = () => {
         const response = await api.put(`/users/${user.id}`, formData);
 
         await updateUserDataStorage(response.data);
+        onRefresh();
 
         Alert.alert('Sucesso!', 'Seus dados foram atualizados com sucesso!');
       } catch (error: unknown) {
@@ -93,7 +101,7 @@ const Profile = () => {
         setLoading(false);
       }
     },
-    [updateUserDataStorage, user.id],
+    [updateUserDataStorage, user.id, onRefresh],
   );
 
   const handleDeleteAccount = useCallback(async () => {
@@ -133,12 +141,16 @@ const Profile = () => {
     <Container>
       <ThemeSwitcher />
 
-      <Header>
-        <Title>Olá,</Title>
-        <Title>{user.name}</Title>
-      </Header>
+      <Content
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Header>
+          <Title>Olá,</Title>
+          <Title>{user.name}</Title>
+        </Header>
 
-      <Content>
         <FormContainer>
           <FormProfileInfoContainer>
             <FormInputContainer>

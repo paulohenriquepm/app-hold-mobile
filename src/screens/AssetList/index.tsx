@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Alert } from 'react-native';
+import { Alert, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { api } from '../../api/api';
 import { AssetItem } from '../../components/AssetItem';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { Title } from '../../components/Title';
+import { waitPromise } from '../../utils/waitPromise';
 
 import { Container, Content, Header, AssetListContainer } from './styles';
 
@@ -18,8 +19,9 @@ interface IAsset {
 }
 
 const AssetList = () => {
-  const [assetList, setAssetList] = useState<IAsset[]>([] as IAsset[]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [assetList, setAssetList] = useState<IAsset[]>([] as IAsset[]);
 
   const navigation = useNavigation();
 
@@ -57,6 +59,11 @@ const AssetList = () => {
     loadAssets();
   }, []);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    waitPromise(1000).then(() => setRefreshing(false));
+  }, []);
+
   const handleNavigateToAssetDetails = useCallback(
     (asset_id: number) => {
       navigation.navigate('AssetDetails', { assetId: asset_id });
@@ -72,7 +79,11 @@ const AssetList = () => {
     <Container>
       <ThemeSwitcher />
 
-      <Content>
+      <Content
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <Header>
           <Title>Ativos</Title>
         </Header>
