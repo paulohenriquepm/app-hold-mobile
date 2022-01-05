@@ -114,7 +114,7 @@ const MyWallet = () => {
     }
 
     loadWallet();
-  }, [user.wallet.id, refreshing]);
+  }, [user, refreshing]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
