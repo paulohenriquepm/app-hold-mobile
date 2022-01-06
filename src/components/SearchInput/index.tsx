@@ -14,10 +14,12 @@ interface IFilterAssetResponse {
 
 interface IAssetSearchInputFieldProps extends ViewProps {
   setFilteredAssets: Dispatch<SetStateAction<IAsset[]>>;
+  shouldClearOnEmpty?: boolean;
 }
 
 const SearchInput = ({
   setFilteredAssets,
+  shouldClearOnEmpty = true,
   ...rest
 }: IAssetSearchInputFieldProps) => {
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,7 @@ const SearchInput = ({
 
   const filterAssets = useCallback(
     async (searchAsset: string) => {
-      if (searchAsset === '') {
+      if (searchAsset === '' && shouldClearOnEmpty) {
         setFilteredAssets([]);
 
         return;
@@ -57,7 +59,7 @@ const SearchInput = ({
       setFilteredAssets(mappedFilteredAssets);
       setLoading(false);
     },
-    [setFilteredAssets],
+    [setFilteredAssets, shouldClearOnEmpty],
   );
 
   return (

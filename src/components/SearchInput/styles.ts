@@ -12,6 +12,7 @@ export const SearchInputContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 
   padding: ${RFValue(8)}px ${RFValue(16)}px;
   background-color: ${({ theme }) => theme.colors.buttonGreyBorderColor};

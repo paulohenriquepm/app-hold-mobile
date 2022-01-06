@@ -8,8 +8,16 @@ import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { Title } from '../../components/Title';
 import { waitPromise } from '../../utils/waitPromise';
 import { SearchInput } from '../../components/SearchInput';
+import { Icon } from '../../components/Icon';
 
-import { Container, Content, Header, AssetListContainer } from './styles';
+import {
+  Container,
+  Content,
+  Header,
+  FilterContainer,
+  AssetListContainer,
+  FilterInputContainer,
+} from './styles';
 
 export interface IAsset {
   id: number;
@@ -90,7 +98,16 @@ const AssetList = () => {
       >
         <Header>
           <Title>Ativos</Title>
-          <SearchInput />
+          <FilterContainer>
+            <FilterInputContainer>
+              <SearchInput
+                setFilteredAssets={setAssetList}
+                shouldClearOnEmpty={false}
+              />
+            </FilterInputContainer>
+
+            <Icon name="filter" />
+          </FilterContainer>
         </Header>
 
         <AssetListContainer>
