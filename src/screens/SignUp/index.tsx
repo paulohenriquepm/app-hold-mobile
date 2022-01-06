@@ -8,7 +8,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import SignUpLogo from '../../../assets/sign-up.svg';
 import { useAuth } from '../../context/auth';
 import { AppButton } from '../../components/AppButton';
-import { GoogleButton } from '../../components/GoogleButton';
 import { Title } from '../../components/Title';
 import { InputFormField } from '../../components/InputFormField';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
@@ -16,11 +15,11 @@ import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import {
   Container,
   Content,
+  LogoAndFormContainer,
   LogoContainer,
   FormContainer,
   TitleFormContainer,
   FormInputContainer,
-  OrText,
   SignInContainer,
   AlreadyOnAppHoldText,
   SignInText,
@@ -92,76 +91,73 @@ const SignUp = () => {
       <ThemeSwitcher />
 
       <Content>
-        <LogoContainer>
-          <SignUpLogo width={270} height={270} />
-        </LogoContainer>
+        <LogoAndFormContainer>
+          <LogoContainer>
+            <SignUpLogo width={270} height={270} />
+          </LogoContainer>
+          <FormContainer>
+            <TitleFormContainer>
+              <Title>Cadastrar</Title>
+            </TitleFormContainer>
 
-        <FormContainer>
-          <TitleFormContainer>
-            <Title>Cadastrar</Title>
-          </TitleFormContainer>
+            <FormInputContainer>
+              <InputFormField
+                control={control}
+                name="name"
+                placeholder="Nome"
+                iconName="user"
+                error={errors.name && errors.name.message}
+              />
+            </FormInputContainer>
+            <FormInputContainer>
+              <InputFormField
+                control={control}
+                name="email"
+                placeholder="E-mail"
+                iconName="at-sign"
+                autoCapitalize="none"
+                error={errors.email && errors.email.message}
+              />
+            </FormInputContainer>
+            <FormInputContainer>
+              <InputFormField
+                control={control}
+                name="password"
+                placeholder="Senha"
+                iconName="lock"
+                autoCapitalize="none"
+                error={errors.password && errors.password.message}
+                secureTextEntry
+              />
+            </FormInputContainer>
 
-          <GoogleButton />
+            <FormInputContainer>
+              <InputFormField
+                control={control}
+                name="password_confirmation"
+                placeholder="Confirmar senha"
+                iconName="lock"
+                autoCapitalize="none"
+                error={
+                  errors.password_confirmation &&
+                  errors.password_confirmation.message
+                }
+                secureTextEntry
+              />
+            </FormInputContainer>
 
-          <OrText>Ou</OrText>
-
-          <FormInputContainer>
-            <InputFormField
-              control={control}
-              name="name"
-              placeholder="Nome"
-              iconName="user"
-              error={errors.name && errors.name.message}
-            />
-          </FormInputContainer>
-          <FormInputContainer>
-            <InputFormField
-              control={control}
-              name="email"
-              placeholder="E-mail"
-              iconName="at-sign"
-              autoCapitalize="none"
-              error={errors.email && errors.email.message}
-            />
-          </FormInputContainer>
-          <FormInputContainer>
-            <InputFormField
-              control={control}
-              name="password"
-              placeholder="Senha"
-              iconName="lock"
-              autoCapitalize="none"
-              error={errors.password && errors.password.message}
-              secureTextEntry
-            />
-          </FormInputContainer>
-
-          <FormInputContainer>
-            <InputFormField
-              control={control}
-              name="password_confirmation"
-              placeholder="Confirmar senha"
-              iconName="lock"
-              autoCapitalize="none"
-              error={
-                errors.password_confirmation &&
-                errors.password_confirmation.message
-              }
-              secureTextEntry
-            />
-          </FormInputContainer>
-
-          <AppButton
-            title="entrar"
-            onPress={handleSubmit(handleSignIn)}
-            loading={loading}
-          >
-            Cadastrar
-          </AppButton>
-        </FormContainer>
+            <AppButton
+              title="entrar"
+              onPress={handleSubmit(handleSignIn)}
+              loading={loading}
+            >
+              Cadastrar
+            </AppButton>
+          </FormContainer>
+        </LogoAndFormContainer>
 
         <SignInContainer>
-          <AlreadyOnAppHoldText>Novo no App&Hold?</AlreadyOnAppHoldText>
+          <AlreadyOnAppHoldText>Ja possui conta?</AlreadyOnAppHoldText>
 
           <SignInText onPress={() => navigation.navigate('SignIn')}>
             Entrar
