@@ -9,6 +9,7 @@ import { Title } from '../../components/Title';
 import { waitPromise } from '../../utils/waitPromise';
 import { SearchInput } from '../../components/SearchInput';
 import { Icon } from '../../components/Icon';
+import { LoadingScreen } from '../../components/LoadingScreen';
 
 import {
   Container,
@@ -84,7 +85,7 @@ const AssetList = () => {
   );
 
   if (loading) {
-    return <Title>Loading...</Title>;
+    return <LoadingScreen />;
   }
 
   return (

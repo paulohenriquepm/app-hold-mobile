@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, Text } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useRoute } from '@react-navigation/native';
 
@@ -9,6 +9,7 @@ import { LinkingComponent } from '../../components/Linking';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { api } from '../../api/api';
 import { useAuth } from '../../context/auth';
+import { LoadingScreen } from '../../components/LoadingScreen';
 
 import {
   Container,
@@ -253,7 +254,7 @@ const AssetDetails = () => {
   }, [asset.name, routeParams.assetId, user.wallet.id]);
 
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <LoadingScreen />;
   }
 
   return (

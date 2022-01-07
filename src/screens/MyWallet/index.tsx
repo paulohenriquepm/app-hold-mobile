@@ -7,6 +7,7 @@ import { Title } from '../../components/Title';
 import { api } from '../../api/api';
 import { useAuth } from '../../context/auth';
 import { waitPromise } from '../../utils/waitPromise';
+import { LoadingScreen } from '../../components/LoadingScreen';
 
 import { AddToWallet } from './AddToWallet';
 import { EditWalletQuantity } from './EditWalletQuantity';
@@ -200,7 +201,7 @@ const MyWallet = () => {
   );
 
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <LoadingScreen />;
   }
 
   return (
