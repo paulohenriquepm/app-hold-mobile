@@ -5,12 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import SignInLogo from '../../../assets/sign-in.svg';
-import { useAuth } from '../../context/auth';
+import ForgotPasswordLogo from '../../../assets/forgot-password.svg';
 import { AppButton } from '../../components/AppButton';
 import { Title } from '../../components/Title';
 import { InputFormField } from '../../components/InputFormField';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
+import { api } from '../../api/api';
 
 import {
   Container,
@@ -19,30 +19,26 @@ import {
   LogoContainer,
   FormContainer,
   TitleFormContainer,
-  TitleFormEmailContainer,
-  TitleFormPasswordContainer,
-  ForgotPasswordText,
-  SignUpContainer,
-  NewToAppHoldText,
-  SignUpText,
+  FormEmailContainer,
+  InfoText,
+  SignInContainer,
+  RememberedPasswordText,
+  SignInText,
 } from './styles';
 
 interface IFormData {
   email: string;
-  password: string;
 }
 
 const schema = Yup.object().shape({
   email: Yup.string()
     .email('O e-mail é inválido')
     .required('O e-mail é obrigatório'),
-  password: Yup.string().required('A senha é obrigatória'),
 });
 
-const SignIn = () => {
+const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
 
-  const { signIn } = useAuth();
   const navigation = useNavigation();
 
   const {
@@ -53,26 +49,29 @@ const SignIn = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleSignIn = useCallback(
+  const handleForgotPassword = useCallback(
     async (formData: IFormData) => {
       try {
         setLoading(true);
 
-        await signIn({
+        await api.post('/password/forgot', {
           email: formData.email,
-          password: formData.password,
+        });
+
+        navigation.navigate('InformResetPasswordToken', {
+          email: formData.email,
         });
       } catch (error: unknown) {
         Alert.alert(
-          'Erro ao autenticar',
+          'Erro ao enviar e-mail',
           error?.response?.data?.message ||
-            'Ocorreu um erro durante a autenticação, por favor, cheque as credenciais e tente novamente.',
+            'Ocorreu um erro durante o envio do e-mail, por favor, tente novamente.',
         );
       } finally {
         setLoading(false);
       }
     },
-    [signIn],
+    [navigation],
   );
 
   return (
@@ -82,14 +81,18 @@ const SignIn = () => {
       <Content>
         <LogoAndFormContainer>
           <LogoContainer>
-            <SignInLogo width={270} height={270} />
+            <ForgotPasswordLogo width={270} height={270} />
           </LogoContainer>
           <FormContainer>
             <TitleFormContainer>
-              <Title>Entrar</Title>
+              <Title>Recuperar senha</Title>
             </TitleFormContainer>
 
-            <TitleFormEmailContainer>
+            <InfoText>
+              Informe o seu e-mail abaixo para recuperar a sua senha.
+            </InfoText>
+
+            <FormEmailContainer>
               <InputFormField
                 control={control}
                 name="email"
@@ -98,45 +101,27 @@ const SignIn = () => {
                 autoCapitalize="none"
                 error={errors.email && errors.email.message}
               />
-            </TitleFormEmailContainer>
-            <TitleFormPasswordContainer>
-              <InputFormField
-                control={control}
-                name="password"
-                placeholder="Senha"
-                iconName="lock"
-                autoCapitalize="none"
-                error={errors.password && errors.password.message}
-                secureTextEntry
-              />
-            </TitleFormPasswordContainer>
-
-            <ForgotPasswordText
-              onPress={() => navigation.navigate('ForgotPassword')}
-            >
-              Esqueci minha senha
-            </ForgotPasswordText>
-
+            </FormEmailContainer>
             <AppButton
               title="entrar"
-              onPress={handleSubmit(handleSignIn)}
+              onPress={handleSubmit(handleForgotPassword)}
               loading={loading}
             >
-              Entrar
+              Enviar e-mail
             </AppButton>
           </FormContainer>
         </LogoAndFormContainer>
 
-        <SignUpContainer>
-          <NewToAppHoldText>Novo no App&Hold?</NewToAppHoldText>
+        <SignInContainer>
+          <RememberedPasswordText>Lembrei minha senha!</RememberedPasswordText>
 
-          <SignUpText onPress={() => navigation.navigate('SignUp')}>
-            Cadastrar
-          </SignUpText>
-        </SignUpContainer>
+          <SignInText onPress={() => navigation.navigate('SignIn')}>
+            Entrar
+          </SignInText>
+        </SignInContainer>
       </Content>
     </Container>
   );
 };
 
-export { SignIn };
+export { ForgotPassword };

@@ -7,12 +7,8 @@ import React, {
   useState,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import * as AuthSession from 'expo-auth-session';
 
 import { api } from '../api/api';
-
-// const { CLIENT_ID } = process.env;
-// const { REDIRECT_URI } = process.env;
 
 interface IUser {
   id: number;
@@ -57,13 +53,6 @@ interface IAuthState {
 interface IAuthProviderProps {
   children: ReactNode;
 }
-
-// interface AuthorizationResponse {
-//   params: {
-//     access_token: string;
-//   };
-//   type: string;
-// }
 
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
@@ -130,34 +119,6 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
       throw err;
     },
   );
-
-  // const signInWithGoogle = useCallback(async () => {
-  //   const RESPONSE_TYPE = 'token';
-  //   const SCOPE = encodeURI('profile email');
-
-  //   const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
-
-  //   const { type, params } = (await AuthSession.startAsync({
-  //     authUrl,
-  //   })) as AuthorizationResponse;
-
-  //   if (type === 'success') {
-  //     const response = await fetch(
-  //       `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`,
-  //     );
-  //     const userInfo = await response.json();
-
-  //     const userLogged = {
-  //       id: userInfo.id,
-  //       email: userInfo.email,
-  //       name: userInfo.given_name,
-  //       photo: userInfo.picture,
-  //     };
-
-  //     // setUser(userLogged);
-  //     // await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
-  //   }
-  // }, []);
 
   const signUp = useCallback(
     async ({ name, email, password }: ISignUpCredencials) => {
