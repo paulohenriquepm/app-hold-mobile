@@ -12,7 +12,15 @@ export const Container = styled.View`
 export const Content = styled.ScrollView.attrs({
   keyboardShouldPersistTaps: 'handled',
   showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },
 })``;
+
+export const LogoAndFormContainer = styled.View`
+  flex: 1;
+`;
 
 export const LogoContainer = styled.View`
   align-items: center;

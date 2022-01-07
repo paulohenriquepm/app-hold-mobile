@@ -12,7 +12,15 @@ export const Container = styled.View`
 export const Content = styled.ScrollView.attrs({
   keyboardShouldPersistTaps: 'handled',
   showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },
 })``;
+
+export const LogoAndFormContainer = styled.View`
+  flex: 1;
+`;
 
 export const LogoContainer = styled.View`
   align-items: center;
@@ -42,19 +50,6 @@ export const ForgotPasswordText = styled.Text`
   font-size: ${RFValue(12)}px;
   color: ${({ theme }) => theme.colors.primary};
   margin-bottom: ${RFValue(32)}px;
-`;
-
-export const ButtonsContainer = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-`;
-
-export const OrText = styled.Text`
-  margin: ${RFValue(10)}px 0;
-  color: ${({ theme }) => theme.colors.subText};
 `;
 
 export const SignUpContainer = styled.View`

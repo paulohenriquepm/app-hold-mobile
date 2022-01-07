@@ -8,7 +8,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import SignInLogo from '../../../assets/sign-in.svg';
 import { useAuth } from '../../context/auth';
 import { AppButton } from '../../components/AppButton';
-import { GoogleButton } from '../../components/GoogleButton';
 import { Title } from '../../components/Title';
 import { InputFormField } from '../../components/InputFormField';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
@@ -22,8 +21,7 @@ import {
   TitleFormEmailContainer,
   TitleFormPasswordContainer,
   ForgotPasswordText,
-  ButtonsContainer,
-  OrText,
+  LogoAndFormContainer,
   SignUpContainer,
   NewToAppHoldText,
   SignUpText,
@@ -82,40 +80,40 @@ const SignIn = () => {
       <ThemeSwitcher />
 
       <Content>
-        <LogoContainer>
-          <SignInLogo width={270} height={270} />
-        </LogoContainer>
+        <LogoAndFormContainer>
+          <LogoContainer>
+            <SignInLogo width={270} height={270} />
+          </LogoContainer>
 
-        <FormContainer>
-          <TitleFormContainer>
-            <Title>Entrar</Title>
-          </TitleFormContainer>
+          <FormContainer>
+            <TitleFormContainer>
+              <Title>Entrar</Title>
+            </TitleFormContainer>
 
-          <TitleFormEmailContainer>
-            <InputFormField
-              control={control}
-              name="email"
-              placeholder="E-mail"
-              iconName="at-sign"
-              autoCapitalize="none"
-              error={errors.email && errors.email.message}
-            />
-          </TitleFormEmailContainer>
-          <TitleFormPasswordContainer>
-            <InputFormField
-              control={control}
-              name="password"
-              placeholder="Senha"
-              iconName="lock"
-              autoCapitalize="none"
-              error={errors.password && errors.password.message}
-              secureTextEntry
-            />
-          </TitleFormPasswordContainer>
+            <TitleFormEmailContainer>
+              <InputFormField
+                control={control}
+                name="email"
+                placeholder="E-mail"
+                iconName="at-sign"
+                autoCapitalize="none"
+                error={errors.email && errors.email.message}
+              />
+            </TitleFormEmailContainer>
+            <TitleFormPasswordContainer>
+              <InputFormField
+                control={control}
+                name="password"
+                placeholder="Senha"
+                iconName="lock"
+                autoCapitalize="none"
+                error={errors.password && errors.password.message}
+                secureTextEntry
+              />
+            </TitleFormPasswordContainer>
 
-          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
 
-          <ButtonsContainer>
             <AppButton
               title="entrar"
               onPress={handleSubmit(handleSignIn)}
@@ -123,12 +121,8 @@ const SignIn = () => {
             >
               Entrar
             </AppButton>
-
-            <OrText>Ou</OrText>
-
-            <GoogleButton />
-          </ButtonsContainer>
-        </FormContainer>
+          </FormContainer>
+        </LogoAndFormContainer>
 
         <SignUpContainer>
           <NewToAppHoldText>Novo no App&Hold?</NewToAppHoldText>
