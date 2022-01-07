@@ -15,7 +15,7 @@ export const Content = styled.ScrollView.attrs({
 })``;
 
 export const Header = styled.View`
-  margin-bottom: ${RFValue(32)}px;
+  margin-bottom: ${RFValue(24)}px;
 `;
 
 export const FilterContainer = styled.View`

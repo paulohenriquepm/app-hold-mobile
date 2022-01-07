@@ -42,18 +42,6 @@ export const FormInputContainer = styled.View`
   margin-bottom: ${RFValue(24)}px;
 `;
 
-export const ForgotPasswordText = styled.Text`
-  font-size: ${RFValue(12)}px;
-  color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: ${RFValue(32)}px;
-`;
-
-export const OrText = styled.Text`
-  margin: ${RFValue(10)}px 0;
-  color: ${({ theme }) => theme.colors.subText};
-  align-self: center;
-`;
-
 export const SignInContainer = styled.View`
   margin-top: ${RFValue(48)}px;
   flex-direction: row;

@@ -95,7 +95,6 @@ const SignUp = () => {
           <LogoContainer>
             <SignUpLogo width={270} height={270} />
           </LogoContainer>
-
           <FormContainer>
             <TitleFormContainer>
               <Title>Cadastrar</Title>
@@ -158,7 +157,7 @@ const SignUp = () => {
         </LogoAndFormContainer>
 
         <SignInContainer>
-          <AlreadyOnAppHoldText>Novo no App&Hold?</AlreadyOnAppHoldText>
+          <AlreadyOnAppHoldText>Ja possui conta?</AlreadyOnAppHoldText>
 
           <SignInText onPress={() => navigation.navigate('SignIn')}>
             Entrar

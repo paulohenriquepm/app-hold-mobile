@@ -15,13 +15,13 @@ import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import {
   Container,
   Content,
+  LogoAndFormContainer,
   LogoContainer,
   FormContainer,
   TitleFormContainer,
   TitleFormEmailContainer,
   TitleFormPasswordContainer,
   ForgotPasswordText,
-  LogoAndFormContainer,
   SignUpContainer,
   NewToAppHoldText,
   SignUpText,
@@ -84,7 +84,6 @@ const SignIn = () => {
           <LogoContainer>
             <SignInLogo width={270} height={270} />
           </LogoContainer>
-
           <FormContainer>
             <TitleFormContainer>
               <Title>Entrar</Title>
