@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import NumericInput from 'react-native-numeric-input';
-import { TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 import Modal from 'react-native-modal';
 
-import { api } from '../../../api/api';
-import { useAuth } from '../../../context/auth';
 import { Icon } from '../../../components/Icon';
 import { Title } from '../../../components/Title';
 import { AppButton } from '../../../components/AppButton';
@@ -19,7 +15,6 @@ import {
   AssetName,
   QuantityContainer,
   Quantity,
-  UpdateQuantityButton,
 } from './styles';
 
 interface EditWalletQuantityProps {
@@ -36,7 +31,6 @@ const EditWalletQuantity: React.FC<EditWalletQuantityProps> = ({
   handleEditAssetQuantity,
 }) => {
   const [newQuantity, setNewQuantity] = useState(assetToEdit.quantity);
-  const { user } = useAuth();
 
   return (
     <Modal

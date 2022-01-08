@@ -29,4 +29,15 @@ export const FilterInputContainer = styled.View`
   margin-right: ${RFValue(8)}px;
 `;
 
+export const FilterIconContainer = styled.TouchableOpacity`
+  width: ${RFValue(24)}px;
+  height: ${RFValue(24)}px;
+`;
+
+export const ResetFilterText = styled.Text`
+  margin-top: ${RFValue(4)}px;
+  font-size: ${RFValue(12)}px;
+  color: ${({ theme }) => theme.colors.primary};
+`;
+
 export const AssetListContainer = styled.ScrollView``;

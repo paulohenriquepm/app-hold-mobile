@@ -27,8 +27,8 @@ const SearchInput = ({
   const { colors } = useTheme();
 
   const filterAssets = useCallback(
-    async (searchAsset: string) => {
-      if (searchAsset === '' && shouldClearOnEmpty) {
+    async (nameOrTicket: string) => {
+      if (nameOrTicket === '' && shouldClearOnEmpty) {
         setFilteredAssets([]);
 
         return;
@@ -38,8 +38,7 @@ const SearchInput = ({
 
       const response = (await api.get('/assets', {
         params: {
-          searchAsset,
-          includeAssetData: false,
+          nameOrTicket,
         },
       })) as IFilterAssetResponse;
 

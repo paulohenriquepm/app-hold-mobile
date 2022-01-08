@@ -18,7 +18,10 @@ import {
   FilterContainer,
   AssetListContainer,
   FilterInputContainer,
+  FilterIconContainer,
+  ResetFilterText,
 } from './styles';
+import { Filter } from './Filter';
 
 export interface IAsset {
   id: number;
@@ -31,10 +34,16 @@ export interface IAsset {
   price: number;
 }
 
+export interface IFilterAsset {
+  sector: string;
+}
+
 const AssetList = () => {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
   const [assetList, setAssetList] = useState<IAsset[]>([] as IAsset[]);
+  const [filters, setFilters] = useState<IFilterAsset>({} as IFilterAsset);
 
   const navigation = useNavigation();
 
@@ -44,9 +53,7 @@ const AssetList = () => {
         setLoading(true);
 
         const response = await api.get('/assets', {
-          params: {
-            includeAssetData: 'false',
-          },
+          params: filters,
         });
 
         const mappedAssetList = response.data.map((asset: IAsset) => ({
@@ -70,9 +77,10 @@ const AssetList = () => {
     }
 
     loadAssets();
-  }, []);
+  }, [filters]);
 
   const onRefresh = useCallback(() => {
+    setFilters({} as IFilterAsset);
     setRefreshing(true);
     waitPromise(1000).then(() => setRefreshing(false));
   }, []);
@@ -83,6 +91,10 @@ const AssetList = () => {
     },
     [navigation],
   );
+
+  const handleToggleShowFilterModal = useCallback(() => {
+    setShowFilterModal(!showFilterModal);
+  }, [showFilterModal]);
 
   if (loading) {
     return <LoadingScreen />;
@@ -107,8 +119,15 @@ const AssetList = () => {
               />
             </FilterInputContainer>
 
-            <Icon name="filter" />
+            <FilterIconContainer onPress={handleToggleShowFilterModal}>
+              <Icon name="filter" />
+            </FilterIconContainer>
           </FilterContainer>
+          {Object.keys(filters).length > 0 && (
+            <ResetFilterText onPress={onRefresh}>
+              Remover filtros
+            </ResetFilterText>
+          )}
         </Header>
 
         <AssetListContainer>
@@ -122,6 +141,12 @@ const AssetList = () => {
           ))}
         </AssetListContainer>
       </Content>
+
+      <Filter
+        isVisible={showFilterModal}
+        setFilters={setFilters}
+        toggleModal={handleToggleShowFilterModal}
+      />
     </Container>
   );
 };
