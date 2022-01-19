@@ -32,24 +32,31 @@ import { IFilterAsset } from '..';
 interface FilterProps {
   isVisible: boolean;
   toggleModal: () => void;
+  currentFilter: IFilterAsset;
   setFilters: Dispatch<SetStateAction<IFilterAsset>>;
 }
 
-const Filter = ({ isVisible, toggleModal, setFilters }: FilterProps) => {
+const Filter = ({
+  isVisible,
+  toggleModal,
+  currentFilter,
+  setFilters,
+}: FilterProps) => {
   const [loading, setLoading] = useState(false);
   const [sectors, setSectors] = useState<string[]>([]);
-  const [selectedFilters, setSelectedFilters] = useState<IFilterAsset>(
-    {} as IFilterAsset,
-  );
+  const [industries, setIndustries] = useState<string[]>([]);
+  const [selectedFilters, setSelectedFilters] =
+    useState<IFilterAsset>(currentFilter);
 
   useEffect(() => {
     async function loadFilters() {
       try {
         setLoading(true);
 
-        const response = await api.get('/assets/select/sectors');
+        const response = await api.get('/assets/filter/all-options');
 
-        setSectors(response.data);
+        setSectors(response.data.sectors);
+        setIndustries(response.data.industries);
       } catch (error: unknown) {
         Alert.alert(
           'Erro ao buscar filtros',
@@ -82,7 +89,7 @@ const Filter = ({ isVisible, toggleModal, setFilters }: FilterProps) => {
     >
       <Container>
         <CloseModalButton onPress={toggleModal}>
-          <Icon name="x" />
+          <Icon name="close" />
         </CloseModalButton>
         <Content>
           <FiltersContainer>
@@ -102,8 +109,41 @@ const Filter = ({ isVisible, toggleModal, setFilters }: FilterProps) => {
                     })
                   }
                 >
+                  <Picker.Item
+                    key="placeholder"
+                    label="Selecione um setor"
+                    value=""
+                  />
                   {sectors.map((sector: string) => (
                     <Picker.Item key={sector} label={sector} value={sector} />
+                  ))}
+                </PickerContainer>
+              </PickerWrapper>
+            </FilterItem>
+
+            <FilterItem>
+              <FilterTitle>Indústria</FilterTitle>
+              <PickerWrapper>
+                <PickerContainer
+                  selectedValue={selectedFilters.industry}
+                  onValueChange={(value: string) =>
+                    setSelectedFilters({
+                      ...selectedFilters,
+                      industry: value,
+                    })
+                  }
+                >
+                  <Picker.Item
+                    key="placeholder"
+                    label="Selecione uma indústria"
+                    value=""
+                  />
+                  {industries.map((industry: string) => (
+                    <Picker.Item
+                      key={industry}
+                      label={industry}
+                      value={industry}
+                    />
                   ))}
                 </PickerContainer>
               </PickerWrapper>

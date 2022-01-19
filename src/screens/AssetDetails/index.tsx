@@ -10,6 +10,7 @@ import { ThemeSwitcher } from '../../components/ThemeSwitcher';
 import { api } from '../../api/api';
 import { useAuth } from '../../context/auth';
 import { LoadingScreen } from '../../components/LoadingScreen';
+import { abbreviateNumber } from '../../utils/abbreviateNumber';
 
 import {
   Container,
@@ -30,7 +31,6 @@ import {
   PickerWrapper,
   PickerContainer,
   AddToWalletContainer,
-  ObsAboutAmountValueText,
 } from './styles';
 
 interface IRouteParams {
@@ -39,17 +39,17 @@ interface IRouteParams {
 
 interface IAssetData {
   id: number;
-  revenue: number;
-  net_income: number;
-  dividends_paid: number;
-  fco: number;
-  fcf: number;
-  ebit: number;
-  cash: number;
-  equity: number;
-  net_margin: number;
-  roe: number;
-  payout: number;
+  revenue?: number;
+  net_income?: number;
+  dividends_paid?: number;
+  fco?: number;
+  fcf?: number;
+  ebit?: number;
+  cash?: number;
+  equity?: number;
+  net_margin?: number;
+  roe?: number;
+  payout?: number;
   year: number;
   quarter: number;
 }
@@ -60,15 +60,17 @@ interface IAsset {
   logo: string;
   b3_ticket: string;
   sector: string;
+  industry?: string;
   address: string;
   city: string;
-  state: string;
+  state?: string;
   country: string;
-  zip: string;
-  website: string;
-  employees: number;
-  ceo: string;
+  zip?: string;
+  website?: string;
+  employees?: number;
+  ceo?: string;
   price: number;
+  market_value: number;
   AssetData: IAssetData[];
   annually: IAssetData[];
   quarterly: IAssetData[];
@@ -79,23 +81,28 @@ interface IFilterPeriod {
   label: string;
 }
 
-const formatValueInMillions = (value: number): number => {
-  const formattedValue = new Intl.NumberFormat('pt-BR').format(value);
-  const findIndexToCut = formattedValue.indexOf('.');
+interface ISelectedPeriod {
+  annually: boolean;
+  quarterly: boolean;
+  period: string;
+}
 
-  return Number(formattedValue.substring(0, findIndexToCut + 4));
+const formatValueInMillions = (value: number | undefined): string | null => {
+  if (!value) return null;
+
+  return abbreviateNumber(Number(value));
 };
 
 const formatAssetDataValuesInMillions = (asset: IAssetData) => {
   return {
-    equity: formatValueInMillions(asset.equity),
-    revenue: formatValueInMillions(asset.revenue),
-    ebit: formatValueInMillions(asset.ebit),
-    net_income: formatValueInMillions(asset.net_income),
-    cash: formatValueInMillions(asset.cash),
-    fco: formatValueInMillions(asset.fco),
-    fcf: formatValueInMillions(asset.fcf),
-    dividends_paid: formatValueInMillions(asset.dividends_paid),
+    equity: formatValueInMillions(asset?.equity),
+    revenue: formatValueInMillions(asset?.revenue),
+    ebit: formatValueInMillions(asset?.ebit),
+    net_income: formatValueInMillions(asset?.net_income),
+    cash: formatValueInMillions(asset?.cash),
+    fco: formatValueInMillions(asset?.fco),
+    fcf: formatValueInMillions(asset?.fcf),
+    dividends_paid: formatValueInMillions(asset?.dividends_paid),
   };
 };
 
@@ -103,11 +110,9 @@ const AssetDetails = () => {
   const [loading, setLoading] = useState(false);
   const [addAssetLoading, setAddAssetLoading] = useState(false);
   const [asset, setAsset] = useState<IAsset>({} as IAsset);
-  const [selectedPeriod, setSelectedPeriod] = useState({
-    annually: true,
-    quarterly: false,
-    period: '2020',
-  });
+  const [selectedPeriod, setSelectedPeriod] = useState<ISelectedPeriod>(
+    {} as ISelectedPeriod,
+  );
   const [filteredAssetData, setFilteredAssetData] = useState<
     IAssetData | undefined
   >({} as IAssetData);
@@ -136,6 +141,7 @@ const AssetDetails = () => {
             style: 'currency',
             currency: 'BRL',
           }).format(response.data.price),
+          market_value: formatValueInMillions(response.data.market_value),
           annually: response.data.AssetData.reduce(
             (prev: IAssetData[], current: IAssetData) => {
               if (current.quarter === null) {
@@ -168,14 +174,22 @@ const AssetDetails = () => {
           ),
         } as IAsset;
 
-        setFilterYearPeriods(
-          formattedAsset.annually.map((assetToGetYear: IAssetData) => {
+        const yearPeriods = formattedAsset.annually.map(
+          (assetToGetYear: IAssetData) => {
             return {
               value: assetToGetYear.year.toString(),
               label: assetToGetYear.year.toString(),
             };
-          }),
+          },
         );
+        const lastPeriodYear = yearPeriods[0].value;
+
+        setSelectedPeriod({
+          annually: true,
+          quarterly: false,
+          period: yearPeriods[0].value,
+        });
+        setFilterYearPeriods(yearPeriods);
         setFilterQuarterPeriods(
           formattedAsset.quarterly.map((assetToGetQuarter: IAssetData) => {
             return {
@@ -185,6 +199,11 @@ const AssetDetails = () => {
                 .padStart(2, '0')}/${assetToGetQuarter?.year.toString()}`,
             };
           }),
+        );
+        setFilteredAssetData(
+          formattedAsset.annually.find(
+            assetToFilter => assetToFilter.year.toString() === lastPeriodYear,
+          ),
         );
         setAsset(formattedAsset);
       } catch (error: unknown) {
@@ -201,31 +220,37 @@ const AssetDetails = () => {
     loadAsset();
   }, [routeParams.assetId]);
 
-  useEffect(() => {
-    if (Object.keys(asset).length === 0) return;
+  const changeSeasonalityData = useCallback(
+    ({ annually, period }) => {
+      setSelectedPeriod({
+        annually,
+        quarterly: !annually,
+        period,
+      });
 
-    if (selectedPeriod.annually) {
+      if (annually) {
+        setFilteredAssetData(
+          asset?.annually?.find(
+            assetToFilter => assetToFilter.year.toString() === period,
+          ),
+        );
+
+        return;
+      }
+
+      const quarter = period.split('/')[0];
+      const year = period.split('/')[1];
+
       setFilteredAssetData(
-        asset.annually?.find(
+        asset.quarterly?.find(
           assetToFilter =>
-            assetToFilter.year.toString() === selectedPeriod.period,
+            assetToFilter.year.toString() === year &&
+            assetToFilter.quarter.toString() === quarter,
         ),
       );
-
-      return;
-    }
-
-    const quarter = selectedPeriod.period.split('/')[0];
-    const year = selectedPeriod.period.split('/')[1];
-
-    setFilteredAssetData(
-      asset.quarterly?.find(
-        assetToFilter =>
-          assetToFilter.year.toString() === year &&
-          assetToFilter.quarter.toString() === quarter,
-      ),
-    );
-  }, [selectedPeriod, asset]);
+    },
+    [asset],
+  );
 
   const addToWallet = useCallback(async () => {
     try {
@@ -242,7 +267,6 @@ const AssetDetails = () => {
         `${asset.name} foi adicionado com sucesso à sua carteira!`,
       );
     } catch (error: unknown) {
-      console.log(error);
       Alert.alert(
         'Erro ao adicionar ativo',
         error?.response?.data?.message ||
@@ -270,7 +294,7 @@ const AssetDetails = () => {
               <AssetInfoTicket>{asset.b3_ticket}</AssetInfoTicket>
             </AssetInfo>
 
-            <AssetImage source={{ uri: asset.logo }} />
+            {asset.logo !== '' && <AssetImage source={{ uri: asset.logo }} />}
           </Header>
 
           <AssetProfileContainer>
@@ -280,11 +304,21 @@ const AssetDetails = () => {
                 <FieldValue>{asset.sector}</FieldValue>
               </View>
 
-              <LinkingComponent
-                linking_text="Site"
-                linking_url={asset.website}
-              />
+              {asset.website && (
+                <LinkingComponent
+                  linking_text="Site"
+                  linking_url={asset.website}
+                />
+              )}
             </Field>
+            {asset.industry && (
+              <Field>
+                <View>
+                  <FieldTitle>Indústria</FieldTitle>
+                  <FieldValue>{asset.industry}</FieldValue>
+                </View>
+              </Field>
+            )}
             <Field>
               <View>
                 <FieldTitle>Sede</FieldTitle>
@@ -293,16 +327,27 @@ const AssetDetails = () => {
                 </FieldValue>
               </View>
             </Field>
+            {asset.ceo && (
+              <Field>
+                <View>
+                  <FieldTitle>CEO</FieldTitle>
+                  <FieldValue>{asset.ceo}</FieldValue>
+                </View>
+              </Field>
+            )}
+
+            {asset.employees && (
+              <Field>
+                <View>
+                  <FieldTitle>Nº de funcionários</FieldTitle>
+                  <FieldValue>{asset.employees}</FieldValue>
+                </View>
+              </Field>
+            )}
             <Field>
               <View>
-                <FieldTitle>CEO</FieldTitle>
-                <FieldValue>{asset.ceo}</FieldValue>
-              </View>
-            </Field>
-            <Field>
-              <View>
-                <FieldTitle>Nº de funcionários</FieldTitle>
-                <FieldValue>{asset.employees}</FieldValue>
+                <FieldTitle>Valor de Mercado</FieldTitle>
+                <FieldValue>{asset.market_value} (valor em milhões)</FieldValue>
               </View>
 
               <View>
@@ -318,9 +363,8 @@ const AssetDetails = () => {
               style={styles.seasonalityButton}
               selected={selectedPeriod.annually}
               onPress={() =>
-                setSelectedPeriod({
+                changeSeasonalityData({
                   annually: true,
-                  quarterly: false,
                   period: filterYearPeriods[0].value,
                 })
               }
@@ -331,9 +375,8 @@ const AssetDetails = () => {
               title="semestral"
               selected={selectedPeriod.quarterly}
               onPress={() =>
-                setSelectedPeriod({
+                changeSeasonalityData({
                   annually: false,
-                  quarterly: true,
                   period: filterQuarterPeriods[0].value,
                 })
               }
@@ -346,7 +389,7 @@ const AssetDetails = () => {
           <PickerWrapper>
             <PickerContainer
               selectedValue={selectedPeriod.period}
-              onValueChange={(value: IFilterPeriod) =>
+              onValueChange={(value: string) =>
                 setSelectedPeriod({
                   ...selectedPeriod,
                   period: value,
@@ -368,49 +411,71 @@ const AssetDetails = () => {
 
           <AssetFinancialContainer>
             <AssetFinancialScrollView>
-              <Field>
-                <FieldTitle>Patrimônio Liq.</FieldTitle>
-                <FieldValue>{filteredAssetData?.equity}</FieldValue>
-              </Field>
-              <Field>
-                <FieldTitle>Receita Liq.</FieldTitle>
-                <FieldValue>{filteredAssetData?.revenue}</FieldValue>
-              </Field>
-              <Field>
-                <FieldTitle>EBIT</FieldTitle>
-                <FieldValue>{filteredAssetData?.ebit}</FieldValue>
-              </Field>
-              <Field>
-                <FieldTitle>Lucro Liq.</FieldTitle>
-                <FieldValue>{filteredAssetData?.net_income}</FieldValue>
-              </Field>
-              <Field>
-                <FieldTitle>Margem Liq.</FieldTitle>
-                <FieldValue>{filteredAssetData?.net_margin}%</FieldValue>
-              </Field>
-              {selectedPeriod.annually && (
+              {filteredAssetData?.equity && (
                 <Field>
-                  <FieldTitle>ROE</FieldTitle>
-                  <FieldValue>{filteredAssetData?.roe}%</FieldValue>
+                  <FieldTitle>Patrimônio Liq.</FieldTitle>
+                  <FieldValue>{filteredAssetData?.equity}</FieldValue>
                 </Field>
               )}
-              <Field>
-                <FieldTitle>Caixa</FieldTitle>
-                <FieldValue>{filteredAssetData?.cash}</FieldValue>
-              </Field>
-              <Field>
-                <FieldTitle>FCO</FieldTitle>
-                <FieldValue>{filteredAssetData?.fco}</FieldValue>
-              </Field>
-              <Field>
-                <FieldTitle>FCO</FieldTitle>
-                <FieldValue>{filteredAssetData?.fco}</FieldValue>
-              </Field>
-              <Field>
-                <FieldTitle>Dividendos</FieldTitle>
-                <FieldValue>{filteredAssetData?.dividends_paid}</FieldValue>
-              </Field>
-              {selectedPeriod.annually && (
+              {filteredAssetData?.revenue && (
+                <Field>
+                  <FieldTitle>Receita Liq.</FieldTitle>
+                  <FieldValue>{filteredAssetData?.revenue}</FieldValue>
+                </Field>
+              )}
+              {filteredAssetData?.ebit && (
+                <Field>
+                  <FieldTitle>EBIT</FieldTitle>
+                  <FieldValue>{filteredAssetData?.ebit}</FieldValue>
+                </Field>
+              )}
+              {filteredAssetData?.net_income && (
+                <Field>
+                  <FieldTitle>Lucro Liq.</FieldTitle>
+                  <FieldValue>{filteredAssetData?.net_income}</FieldValue>
+                </Field>
+              )}
+              {filteredAssetData?.net_margin && filteredAssetData?.net_income && (
+                <Field>
+                  <FieldTitle>Margem Liq.</FieldTitle>
+                  <FieldValue>
+                    {Math.sign(filteredAssetData?.net_income) === -1
+                      ? 'Prejuízo'
+                      : `${filteredAssetData?.net_margin}%`}
+                  </FieldValue>
+                </Field>
+              )}
+              {selectedPeriod.annually &&
+                filteredAssetData?.net_income &&
+                filteredAssetData?.roe && (
+                  <Field>
+                    <FieldTitle>ROE</FieldTitle>
+                    <FieldValue>
+                      {Math.sign(filteredAssetData?.net_income) === -1
+                        ? 'Prejuízo'
+                        : `${filteredAssetData?.roe}%`}
+                    </FieldValue>
+                  </Field>
+                )}
+              {filteredAssetData?.cash && (
+                <Field>
+                  <FieldTitle>Caixa</FieldTitle>
+                  <FieldValue>{filteredAssetData?.cash}</FieldValue>
+                </Field>
+              )}
+              {filteredAssetData?.fco && (
+                <Field>
+                  <FieldTitle>FCO</FieldTitle>
+                  <FieldValue>{filteredAssetData?.fco}</FieldValue>
+                </Field>
+              )}
+              {filteredAssetData?.dividends_paid && (
+                <Field>
+                  <FieldTitle>Dividendos</FieldTitle>
+                  <FieldValue>{filteredAssetData?.dividends_paid}</FieldValue>
+                </Field>
+              )}
+              {selectedPeriod.annually && filteredAssetData?.payout && (
                 <Field>
                   <FieldTitle>Payout</FieldTitle>
                   <FieldValue>{filteredAssetData?.payout}%</FieldValue>
@@ -421,9 +486,6 @@ const AssetDetails = () => {
         </AssetDetailsInfo>
 
         <AddToWalletContainer>
-          <ObsAboutAmountValueText>
-            * Valores em BRL e na escala de milhões
-          </ObsAboutAmountValueText>
           <AppButton
             title="adicionar"
             onPress={addToWallet}

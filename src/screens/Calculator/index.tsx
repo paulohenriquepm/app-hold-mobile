@@ -71,7 +71,11 @@ const Calculator = () => {
           <Title>Calculadora de dividendos</Title>
         </Header>
 
-        <AssetsSearchInputField top={100} setSelectedAsset={setSelectedAsset} />
+        <AssetsSearchInputField
+          top={100}
+          setSelectedAsset={setSelectedAsset}
+          onlyAssetsThatCanCalculateDividend={1}
+        />
 
         {Object.keys(selectedAsset).length > 0 && (
           <>

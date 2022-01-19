@@ -103,7 +103,7 @@ const InformResetPasswordToken = () => {
                 control={control}
                 name="token"
                 placeholder="Código"
-                iconName="key"
+                iconName="vpn-key"
                 autoCapitalize="none"
                 error={errors.token && errors.token.message}
               />

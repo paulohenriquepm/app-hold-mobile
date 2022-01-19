@@ -12,7 +12,7 @@ const ThemeSwitcher = () => {
     <Container onPress={handleToggleTheme}>
       <Icon
         color={currentTheme.colors.themeSwitcher}
-        name={currentTheme.title === 'light' ? 'moon' : 'sun'}
+        name={currentTheme.title === 'light' ? 'wb-sunny' : 'nightlight-round'}
       />
     </Container>
   );

@@ -158,7 +158,7 @@ const Profile = () => {
                 control={control}
                 name="name"
                 placeholder="Nome"
-                iconName="user"
+                iconName="badge"
                 error={errors.name && errors.name.message}
               />
             </FormInputContainer>
@@ -167,7 +167,7 @@ const Profile = () => {
                 control={control}
                 name="email"
                 placeholder="Email"
-                iconName="at-sign"
+                iconName="email"
                 autoCapitalize="none"
                 error={errors.email && errors.email.message}
               />

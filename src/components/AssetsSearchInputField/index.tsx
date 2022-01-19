@@ -10,6 +10,7 @@ import { Container, ResultsContainer, ResultsList } from './styles';
 interface IAssetSearchInputFieldProps extends ViewProps {
   setSelectedAsset: Dispatch<SetStateAction<IAsset>>;
   top: number;
+  onlyAssetsThatCanCalculateDividend?: number;
   functionToExecute?: () => void;
 }
 
@@ -17,6 +18,7 @@ const AssetsSearchInputField = ({
   setSelectedAsset,
   top,
   functionToExecute,
+  onlyAssetsThatCanCalculateDividend = 0,
   ...rest
 }: IAssetSearchInputFieldProps) => {
   const [filteredAssets, setFilteredAssets] = useState<IAsset[]>([]);
@@ -35,7 +37,10 @@ const AssetsSearchInputField = ({
 
   return (
     <Container top={top} {...rest}>
-      <SearchInput setFilteredAssets={setFilteredAssets} />
+      <SearchInput
+        setFilteredAssets={setFilteredAssets}
+        onlyAssetsThatCanCalculateDividend={onlyAssetsThatCanCalculateDividend}
+      />
       {filteredAssets.length > 0 && (
         <ResultsContainer>
           <ResultsList>

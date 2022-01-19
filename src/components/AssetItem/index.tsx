@@ -7,6 +7,7 @@ interface IAsset {
   name: string;
   b3_ticket: string;
   sector: string;
+  industry?: string;
   logo: string;
 }
 
@@ -29,9 +30,12 @@ const AssetItem = ({
         <AssetName>
           {asset.name} - {asset.b3_ticket}
         </AssetName>
-        <AssetSector>{asset.sector}</AssetSector>
+        <AssetSector>Setor: {asset.sector}</AssetSector>
+        {asset?.industry && (
+          <AssetSector>Indústria: {asset.industry}</AssetSector>
+        )}
       </AssetInfo>
-      <AssetLogo source={{ uri: asset.logo }} />
+      {asset.logo !== '' && <AssetLogo source={{ uri: asset.logo }} />}
     </Asset>
   );
 };

@@ -1,12 +1,13 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import SvgUri from 'expo-svg-uri';
 
 export const Asset = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-  margin-bottom: ${RFValue(16)}px;
+  margin-bottom: ${RFValue(10)}px;
   padding: ${RFValue(8)}px;
   border-width: ${RFValue(1)}px;
   border-color: ${({ theme }) => theme.colors.buttonGreyBorderColor};
@@ -26,7 +27,7 @@ export const AssetSector = styled.Text`
   color: ${({ theme }) => theme.colors.subText};
 `;
 
-export const AssetLogo = styled.Image`
+export const AssetLogo = styled(SvgUri)`
   width: ${RFValue(48)}px;
   height: ${RFValue(32)}px;
 `;

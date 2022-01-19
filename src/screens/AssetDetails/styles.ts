@@ -78,7 +78,6 @@ export const AssetFinancialContainer = styled.View`
   background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: ${RFValue(4)}px;
   margin-bottom: ${RFValue(16)}px;
-  height: ${RFValue(167)}px;
 `;
 
 export const SeasonalityContainer = styled.View`
@@ -103,9 +102,3 @@ export const PickerContainer = styled(Picker)`
 `;
 
 export const AddToWalletContainer = styled.View``;
-
-export const ObsAboutAmountValueText = styled.Text`
-  align-self: flex-end;
-  margin-bottom: ${RFValue(4)}px;
-  color: ${({ theme }) => theme.colors.subText};
-`;

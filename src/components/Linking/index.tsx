@@ -12,7 +12,7 @@ const LinkingComponent = ({ linking_text, linking_url }: LinkingProps) => {
   return (
     <Container onPress={() => Linking.openURL(linking_url)}>
       <LinkingText>{linking_text}</LinkingText>
-      <LinkingIcon name="external-link" />
+      <LinkingIcon name="open-in-new" />
     </Container>
   );
 };

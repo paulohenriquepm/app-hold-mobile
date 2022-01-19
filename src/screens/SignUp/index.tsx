@@ -105,7 +105,7 @@ const SignUp = () => {
                 control={control}
                 name="name"
                 placeholder="Nome"
-                iconName="user"
+                iconName="badge"
                 error={errors.name && errors.name.message}
               />
             </FormInputContainer>
@@ -114,7 +114,7 @@ const SignUp = () => {
                 control={control}
                 name="email"
                 placeholder="E-mail"
-                iconName="at-sign"
+                iconName="email"
                 autoCapitalize="none"
                 error={errors.email && errors.email.message}
               />

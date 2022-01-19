@@ -94,7 +94,7 @@ const SignIn = () => {
                 control={control}
                 name="email"
                 placeholder="E-mail"
-                iconName="at-sign"
+                iconName="email"
                 autoCapitalize="none"
                 error={errors.email && errors.email.message}
               />

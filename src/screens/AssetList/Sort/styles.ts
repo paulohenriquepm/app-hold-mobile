@@ -30,14 +30,14 @@ export const Header = styled.View`
   margin-bottom: ${RFValue(24)}px;
 `;
 
-export const FiltersContainer = styled.View``;
+export const SortOptionsContainer = styled.View``;
 
-export const FilterTitle = styled.Text`
+export const SortTitle = styled.Text`
   font-size: ${RFValue(20)}px;
   margin-bottom: ${RFValue(8)}px;
 `;
 
-export const FilterItem = styled.View``;
+export const SortItem = styled.View``;
 
 export const PickerWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.secondary};
@@ -52,4 +52,21 @@ export const PickerContainer = styled(Picker)`
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.colors.title};
+`;
+
+export const OrderDirectionsContainer = styled.View`
+  flex-direction: row;
+`;
+
+export const OrderDirectionItem = styled.TouchableOpacity`
+  flex-direction: row;
+  margin-right: ${RFValue(32)}px;
+`;
+
+export const OrderDirectionItemTextContainer = styled.View`
+  flex-direction: row;
+`;
+
+export const OrderDirectionItemText = styled.Text`
+  margin: 0 ${RFValue(4)}px;
 `;

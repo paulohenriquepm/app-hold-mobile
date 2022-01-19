@@ -28,14 +28,9 @@ interface ThemeProviderProps {
 const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
 
 function ThemeProvider({ children }: ThemeProviderProps) {
-  const colorScheme = Appearance.getColorScheme();
   const [currentTheme, setCurrentTheme] = useState<DefaultTheme>(light);
 
   const loadTheme = useCallback(async () => {
-    setCurrentTheme(light);
-
-    return;
-
     const themeStorage = await AsyncStorage.getItem('@apphold:theme');
 
     if (themeStorage) {
@@ -44,8 +39,8 @@ function ThemeProvider({ children }: ThemeProviderProps) {
       return;
     }
 
-    setCurrentTheme(colorScheme === 'light' ? light : dark);
-  }, [colorScheme]);
+    setCurrentTheme(light);
+  }, []);
 
   useEffect(() => {
     loadTheme();

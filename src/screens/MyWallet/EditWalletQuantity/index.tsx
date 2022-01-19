@@ -41,7 +41,7 @@ const EditWalletQuantity: React.FC<EditWalletQuantityProps> = ({
     >
       <Container>
         <CloseModalButton onPress={toggleModal}>
-          <Icon name="x" />
+          <Icon name="close" />
         </CloseModalButton>
         <Content>
           <Header>

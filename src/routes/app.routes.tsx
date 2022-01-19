@@ -64,7 +64,7 @@ const AppRoutes = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <Icon
-                name="folder"
+                name="account-balance-wallet"
                 size={24}
                 color={
                   focused
@@ -83,7 +83,7 @@ const AppRoutes = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <Icon
-                name="dollar-sign"
+                name="calculate"
                 size={24}
                 color={
                   focused
@@ -102,7 +102,7 @@ const AppRoutes = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <Icon
-                name="user"
+                name="person"
                 size={24}
                 color={
                   focused

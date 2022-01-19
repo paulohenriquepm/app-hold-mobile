@@ -257,12 +257,12 @@ const MyWallet = () => {
                 <TrashIconContainer
                   onPress={() => handleOpenDeleteAssetAlertDialog(asset.id)}
                 >
-                  <TrashIcon name="trash" />
+                  <TrashIcon name="delete" />
                 </TrashIconContainer>
                 <TrashIconContainer
                   onPress={() => handleOpenDeleteAssetAlertDialog(asset.id)}
                 >
-                  <TrashIcon name="trash" />
+                  <TrashIcon name="delete" />
                 </TrashIconContainer>
               </WalletAssetsListBodyItem>
             ))}

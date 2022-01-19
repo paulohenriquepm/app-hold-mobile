@@ -9,10 +9,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Content = styled.ScrollView.attrs({
-  keyboardShouldPersistTaps: 'handled',
-  showsVerticalScrollIndicator: false,
-})``;
+export const Content = styled.View``;
 
 export const Header = styled.View`
   margin-bottom: ${RFValue(24)}px;
@@ -25,19 +22,36 @@ export const FilterContainer = styled.View`
 `;
 
 export const FilterInputContainer = styled.View`
-  width: 90%;
+  width: 78%;
   margin-right: ${RFValue(8)}px;
 `;
 
 export const FilterIconContainer = styled.TouchableOpacity`
+  margin-left: ${RFValue(4)}px;
   width: ${RFValue(24)}px;
   height: ${RFValue(24)}px;
 `;
 
-export const ResetFilterText = styled.Text`
+export const FilterTextsContainer = styled.View`
   margin-top: ${RFValue(4)}px;
-  font-size: ${RFValue(12)}px;
+  padding: 0 ${RFValue(4)}px;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const FilterCountResults = styled.Text`
+  font-size: ${RFValue(10)}px;
+  color: ${({ theme }) => theme.colors.placeholder};
+`;
+
+export const ResetFilterText = styled.Text`
+  font-size: ${RFValue(10)}px;
   color: ${({ theme }) => theme.colors.primary};
 `;
 
-export const AssetListContainer = styled.ScrollView``;
+export const AssetListContainer = styled.View``;
+
+export const AssetFlatList = styled.FlatList`
+  height: 80%;
+`;
