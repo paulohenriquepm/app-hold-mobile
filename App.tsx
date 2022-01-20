@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import {
   useFonts,
   Roboto_400Regular,
@@ -18,7 +19,11 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return (
+      <View accessibilityValue={{ text: 'Tela de Carregamento' }}>
+        <AppLoading />
+      </View>
+    );
   }
 
   return (

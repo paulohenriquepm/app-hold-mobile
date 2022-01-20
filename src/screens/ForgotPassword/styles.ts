@@ -57,7 +57,7 @@ export const SignInContainer = styled.View`
 `;
 
 export const RememberedPasswordText = styled.Text`
-  color: ${({ theme }) => theme.colors.subText};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const SignInText = styled.Text`

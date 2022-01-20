@@ -9,7 +9,14 @@ const ThemeSwitcher = () => {
   const { handleToggleTheme, currentTheme } = useThemeContext();
 
   return (
-    <Container onPress={handleToggleTheme}>
+    <Container
+      onPress={handleToggleTheme}
+      accessibilityLabel={
+        currentTheme.title === 'light'
+          ? 'Trocar para tema escuro'
+          : 'Trocar para tema claro'
+      }
+    >
       <Icon
         color={currentTheme.colors.themeSwitcher}
         name={currentTheme.title === 'light' ? 'wb-sunny' : 'nightlight-round'}

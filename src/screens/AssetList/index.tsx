@@ -194,15 +194,22 @@ const AssetList = () => {
           <FilterContainer>
             <FilterInputContainer>
               <SearchInput
+                accessibilityLabel="buscar por ativo por nome ou ticket"
                 setFilteredAssets={setAssetList}
                 shouldClearOnEmpty={false}
               />
             </FilterInputContainer>
 
-            <FilterIconContainer onPress={handleToggleShowOrderModal}>
+            <FilterIconContainer
+              accessibilityLabel="ordernar ativos"
+              onPress={handleToggleShowOrderModal}
+            >
               <Icon name="sort" />
             </FilterIconContainer>
-            <FilterIconContainer onPress={handleToggleShowFilterModal}>
+            <FilterIconContainer
+              accessibilityLabel="filtrar ativos"
+              onPress={handleToggleShowFilterModal}
+            >
               <Icon name="filter-alt" />
             </FilterIconContainer>
           </FilterContainer>
@@ -231,6 +238,7 @@ const AssetList = () => {
             }
             renderItem={({ item }: ListRenderItemInfo<IAsset>) => (
               <AssetItem
+                accessibilityLabel={item.name}
                 key={item.id}
                 onPress={() => handleNavigateToAssetDetails(item.id)}
                 title={item.name}

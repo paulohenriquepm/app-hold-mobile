@@ -24,6 +24,7 @@ export const LogoAndFormContainer = styled.View`
 
 export const LogoContainer = styled.View`
   align-items: center;
+  margin-bottom: ${RFValue(16)}px;
 `;
 
 export const FormContainer = styled.View`
@@ -34,12 +35,11 @@ export const FormContainer = styled.View`
 `;
 
 export const TitleFormContainer = styled.View`
-  margin-top: ${RFValue(16)}px;
-  margin-bottom: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(8)}px;
 `;
 
 export const FormInputContainer = styled.View`
-  margin-bottom: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(8)}px;
 `;
 
 export const SignInContainer = styled.View`
@@ -51,7 +51,7 @@ export const SignInContainer = styled.View`
 `;
 
 export const AlreadyOnAppHoldText = styled.Text`
-  color: ${({ theme }) => theme.colors.subText};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const SignInText = styled.Text`

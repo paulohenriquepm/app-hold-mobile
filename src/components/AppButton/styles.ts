@@ -10,11 +10,13 @@ interface ButtonTextProps {
   selected: boolean;
 }
 
+export const AccessibilityContainer = styled.View``;
+
 export const Container = styled(RectButton)<ContainerProps>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: ${RFValue(40)}px;
+  height: ${RFValue(48)}px;
 
   background-color: ${({ backgroundColor, selected, theme }) =>
     selected ? backgroundColor : theme.colors.secondary};
@@ -25,5 +27,5 @@ export const ButtonText = styled.Text<ButtonTextProps>`
   color: ${({ selected, theme }) =>
     selected ? theme.colors.buttonText : theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: ${RFValue(16)}px;
+  font-size: ${RFValue(20)}px;
 `;

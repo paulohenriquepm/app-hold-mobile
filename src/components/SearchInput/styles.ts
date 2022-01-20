@@ -6,6 +6,7 @@ export const TextInputField = styled(DelayInput)`
   flex: 1;
   margin-right: ${RFValue(8)}px;
   color: ${({ theme }) => theme.colors.text};
+  height: 100%;
 `;
 
 export const SearchInputContainer = styled.View`
@@ -13,8 +14,9 @@ export const SearchInputContainer = styled.View`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: ${RFValue(48)}px;
 
-  padding: ${RFValue(8)}px ${RFValue(16)}px;
+  padding: 0 ${RFValue(16)}px;
   background-color: ${({ theme }) => theme.colors.buttonGreyBorderColor};
   border-radius: ${RFValue(8)}px;
 `;

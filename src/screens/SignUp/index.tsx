@@ -131,7 +131,7 @@ const SignUp = () => {
               />
             </FormInputContainer>
 
-            <FormInputContainer>
+            <FormInputContainer style={{ marginBottom: 24 }}>
               <InputFormField
                 control={control}
                 name="password_confirmation"
@@ -147,9 +147,10 @@ const SignUp = () => {
             </FormInputContainer>
 
             <AppButton
-              title="entrar"
+              title="botão de cadastrar"
               onPress={handleSubmit(handleSignIn)}
               loading={loading}
+              accessibilityLabel="botão de cadastrar"
             >
               Cadastrar
             </AppButton>

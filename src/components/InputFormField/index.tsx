@@ -5,7 +5,13 @@ import { useTheme } from 'styled-components';
 
 import { Icon } from '../Icon';
 
-import { Container, InputText, InputContainer, ErrorText } from './styles';
+import {
+  Container,
+  InputText,
+  InputContainer,
+  ErrorText,
+  InputTextBottomLine,
+} from './styles';
 
 interface InputFormFieldProps extends TextInputProps {
   control: Control;
@@ -30,13 +36,14 @@ const InputFormField = ({
         name={name}
         render={({ field: { onChange, value } }) => (
           <InputContainer>
-            {iconName && <Icon color={colors.placeholder} name={iconName} />}
+            {iconName && <Icon color={colors.text} name={iconName} />}
             <InputText
               onChangeText={onChange}
               value={value}
-              placeholderTextColor={colors.placeholder}
+              placeholderTextColor={colors.text}
               {...rest}
             />
+            <InputTextBottomLine />
           </InputContainer>
         )}
       />

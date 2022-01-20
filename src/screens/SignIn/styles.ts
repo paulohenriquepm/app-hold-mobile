@@ -24,6 +24,7 @@ export const LogoAndFormContainer = styled.View`
 
 export const LogoContainer = styled.View`
   align-items: center;
+  margin-bottom: ${RFValue(16)}px;
 `;
 
 export const FormContainer = styled.View`
@@ -34,12 +35,11 @@ export const FormContainer = styled.View`
 `;
 
 export const TitleFormContainer = styled.View`
-  margin-top: ${RFValue(16)}px;
-  margin-bottom: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(8)}px;
 `;
 
 export const TitleFormEmailContainer = styled.View`
-  margin-bottom: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(8)}px;
 `;
 
 export const TitleFormPasswordContainer = styled.View`
@@ -49,6 +49,7 @@ export const TitleFormPasswordContainer = styled.View`
 export const ForgotPasswordText = styled.Text`
   font-size: ${RFValue(12)}px;
   color: ${({ theme }) => theme.colors.primary};
+  margin-top: ${RFValue(8)}px;
   margin-bottom: ${RFValue(32)}px;
 `;
 
@@ -61,7 +62,7 @@ export const SignUpContainer = styled.View`
 `;
 
 export const NewToAppHoldText = styled.Text`
-  color: ${({ theme }) => theme.colors.subText};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const SignUpText = styled.Text`

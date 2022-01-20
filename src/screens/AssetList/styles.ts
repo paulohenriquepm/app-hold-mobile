@@ -22,14 +22,17 @@ export const FilterContainer = styled.View`
 `;
 
 export const FilterInputContainer = styled.View`
-  width: 78%;
+  height: ${RFValue(48)}px;
+  width: 60%;
   margin-right: ${RFValue(8)}px;
 `;
 
 export const FilterIconContainer = styled.TouchableOpacity`
-  margin-left: ${RFValue(4)}px;
-  width: ${RFValue(24)}px;
-  height: ${RFValue(24)}px;
+  width: ${RFValue(48)}px;
+  height: ${RFValue(48)}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const FilterTextsContainer = styled.View`

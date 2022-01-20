@@ -118,8 +118,9 @@ const SignIn = () => {
             </ForgotPasswordText>
 
             <AppButton
-              title="entrar"
+              title="botão de entrar"
               onPress={handleSubmit(handleSignIn)}
+              accessibilityLabel="botão de entrar"
               loading={loading}
             >
               Entrar

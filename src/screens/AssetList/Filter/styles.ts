@@ -22,8 +22,13 @@ export const Content = styled.ScrollView.attrs({
 
 export const CloseModalButton = styled.TouchableOpacity`
   position: absolute;
-  top: ${RFValue(16)}px;
-  right: ${RFValue(16)}px;
+  top: ${RFValue(8)}px;
+  right: ${RFValue(8)}px;
+  height: ${RFValue(48)}px;
+  width: ${RFValue(48)}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Header = styled.View`
@@ -37,7 +42,10 @@ export const FilterTitle = styled.Text`
   margin-bottom: ${RFValue(8)}px;
 `;
 
-export const FilterItem = styled.View``;
+export const FilterItem = styled.View`
+  height: ${RFValue(48)}px;
+  margin-bottom: ${RFValue(48)}px;
+`;
 
 export const PickerWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.secondary};

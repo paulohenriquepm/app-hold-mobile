@@ -27,17 +27,19 @@ export const Content = styled.ScrollView.attrs({
 export const FormContainer = styled.View``;
 
 export const FormProfileInfoContainer = styled.View`
-  margin-bottom: ${RFValue(16)}px;
+  margin-bottom: ${RFValue(8)}px;
 `;
 
 export const FormPasswordInfoContainer = styled.View``;
 
 export const FormInputContainer = styled.View`
-  margin-bottom: ${RFValue(24)}px;
+  margin-bottom: ${RFValue(8)}px;
 `;
 
-export const ButtonsContainer = styled.View``;
+export const ButtonsContainer = styled.View`
+  margin-top: ${RFValue(24)}px;
+`;
 
 export const DeleteAccountButton = styled(AppButton)`
-  margin-top: ${RFValue(48)}px;
+  margin-top: ${RFValue(24)}px;
 `;
