@@ -19,7 +19,7 @@ export const Container = styled(RectButton)<ContainerProps>`
   height: ${RFValue(48)}px;
 
   background-color: ${({ backgroundColor, selected, theme }) =>
-    selected ? backgroundColor : theme.colors.secondary};
+    selected ? backgroundColor : theme.colors.box};
   border-radius: ${RFValue(8)}px;
 `;
 

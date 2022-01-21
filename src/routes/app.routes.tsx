@@ -35,6 +35,10 @@ const AppRoutes = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
+        tabBarStyle: {
+          backgroundColor: currentTheme.colors.background,
+          borderTopWidth: 0,
+        },
       }}
       initialRouteName="AssetList"
     >

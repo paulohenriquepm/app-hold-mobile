@@ -40,6 +40,7 @@ export const FiltersContainer = styled.View``;
 export const FilterTitle = styled.Text`
   font-size: ${RFValue(20)}px;
   margin-bottom: ${RFValue(8)}px;
+  color: ${({ theme }) => theme.colors.title};
 `;
 
 export const FilterItem = styled.View`
@@ -48,14 +49,14 @@ export const FilterItem = styled.View`
 `;
 
 export const PickerWrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.box};
   padding: ${RFValue(4)}px;
   border-radius: ${RFValue(10)}px;
   margin-bottom: ${RFValue(16)}px;
 `;
 
 export const PickerContainer = styled(Picker)`
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.box};
   height: ${RFValue(40)}px;
   align-items: center;
   justify-content: center;

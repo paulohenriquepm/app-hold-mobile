@@ -74,11 +74,12 @@ const SearchInput = ({
         onChangeText={(value: string) => filterAssets(value)}
         delayTimeout={500}
         placeholder="Ex: Weg ou WEGE3"
+        placeholderTextColor={colors.text}
       />
       {loading ? (
-        <ActivityIndicator size="small" color={colors.background} />
+        <ActivityIndicator size="small" color={colors.themeSwitcher} />
       ) : (
-        <Icon name="search" />
+        <Icon name="search" color={colors.themeSwitcher} />
       )}
     </SearchInputContainer>
   );

@@ -24,6 +24,7 @@ import {
   ForgotPasswordText,
   SignUpContainer,
   NewToAppHoldText,
+  SignUpTextContainer,
   SignUpText,
 } from './styles';
 
@@ -131,9 +132,9 @@ const SignIn = () => {
         <SignUpContainer>
           <NewToAppHoldText>Novo no App&Hold?</NewToAppHoldText>
 
-          <SignUpText onPress={() => navigation.navigate('SignUp')}>
-            Cadastrar
-          </SignUpText>
+          <SignUpTextContainer onPress={() => navigation.navigate('SignUp')}>
+            <SignUpText>Cadastrar</SignUpText>
+          </SignUpTextContainer>
         </SignUpContainer>
       </Content>
     </Container>

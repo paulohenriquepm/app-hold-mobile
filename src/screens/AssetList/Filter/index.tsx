@@ -14,6 +14,7 @@ import { Title } from '../../../components/Title';
 import { api } from '../../../api/api';
 import { LoadingScreen } from '../../../components/LoadingScreen';
 import { AppButton } from '../../../components/AppButton';
+import { useThemeContext } from '../../../context/theme';
 
 import {
   Container,
@@ -47,6 +48,8 @@ const Filter = ({
   const [industries, setIndustries] = useState<string[]>([]);
   const [selectedFilters, setSelectedFilters] =
     useState<IFilterAsset>(currentFilter);
+
+  const { currentTheme } = useThemeContext();
 
   useEffect(() => {
     async function loadFilters() {
@@ -89,7 +92,7 @@ const Filter = ({
     >
       <Container>
         <CloseModalButton onPress={toggleModal}>
-          <Icon name="close" />
+          <Icon name="close" color={currentTheme.colors.themeSwitcher} />
         </CloseModalButton>
         <Content>
           <FiltersContainer>

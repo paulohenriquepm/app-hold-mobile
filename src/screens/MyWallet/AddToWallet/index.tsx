@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 
 import { api } from '../../../api/api';
 import { useAuth } from '../../../context/auth';
+import { useThemeContext } from '../../../context/theme';
 import { AssetsSearchInputField } from '../../../components/AssetsSearchInputField';
 import { Icon } from '../../../components/Icon';
 import { Title } from '../../../components/Title';
@@ -25,6 +26,7 @@ const AddToWallet: React.FC<AddToWalletProps> = ({
   const [selectedAsset, setSelectedAsset] = useState<IAsset>({} as IAsset);
 
   const { user } = useAuth();
+  const { currentTheme } = useThemeContext();
 
   useEffect(() => {
     async function addToWallet() {
@@ -59,7 +61,7 @@ const AddToWallet: React.FC<AddToWalletProps> = ({
     <Modal isVisible={isVisible} propagateSwipe onBackdropPress={toggleModal}>
       <Container>
         <CloseModalButton onPress={toggleModal}>
-          <Icon name="close" />
+          <Icon name="close" color={currentTheme.colors.themeSwitcher} />
         </CloseModalButton>
         <Content>
           <Header>

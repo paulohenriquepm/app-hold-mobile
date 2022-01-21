@@ -17,11 +17,16 @@ export const Content = styled.ScrollView.attrs({
 
 export const CloseModalButton = styled.TouchableOpacity`
   position: absolute;
-  top: ${RFValue(16)}px;
-  right: ${RFValue(16)}px;
+  right: ${RFValue(8)}px;
+  height: ${RFValue(48)}px;
+  width: ${RFValue(48)}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Header = styled.View`
+  margin-top: ${RFValue(16)}px;
   margin-bottom: ${RFValue(16)}px;
 `;
 

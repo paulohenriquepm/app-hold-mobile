@@ -22,6 +22,7 @@ import {
   FormInputContainer,
   SignInContainer,
   AlreadyOnAppHoldText,
+  SignInTextContainer,
   SignInText,
 } from './styles';
 
@@ -160,9 +161,9 @@ const SignUp = () => {
         <SignInContainer>
           <AlreadyOnAppHoldText>Ja possui conta?</AlreadyOnAppHoldText>
 
-          <SignInText onPress={() => navigation.navigate('SignIn')}>
-            Entrar
-          </SignInText>
+          <SignInTextContainer onPress={() => navigation.navigate('SignIn')}>
+            <SignInText>Entrar</SignInText>
+          </SignInTextContainer>
         </SignInContainer>
       </Content>
     </Container>

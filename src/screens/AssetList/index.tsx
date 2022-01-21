@@ -204,13 +204,13 @@ const AssetList = () => {
               accessibilityLabel="ordernar ativos"
               onPress={handleToggleShowOrderModal}
             >
-              <Icon name="sort" />
+              <Icon name="sort" color={colors.themeSwitcher} />
             </FilterIconContainer>
             <FilterIconContainer
               accessibilityLabel="filtrar ativos"
               onPress={handleToggleShowFilterModal}
             >
-              <Icon name="filter-alt" />
+              <Icon name="filter-alt" color={colors.themeSwitcher} />
             </FilterIconContainer>
           </FilterContainer>
 

@@ -48,7 +48,7 @@ export const AssetDetailsInfo = styled.View``;
 
 export const AssetProfileContainer = styled.View`
   padding: ${RFValue(4)}px ${RFValue(8)}px;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.box};
   border-radius: ${RFValue(4)}px;
   margin-bottom: ${RFValue(16)}px;
 `;
@@ -75,7 +75,7 @@ export const AssetFinancialScrollView = styled.ScrollView.attrs({
 
 export const AssetFinancialContainer = styled.View`
   padding: ${RFValue(4)}px ${RFValue(8)}px;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.box};
   border-radius: ${RFValue(4)}px;
   margin-bottom: ${RFValue(16)}px;
 `;

@@ -14,6 +14,7 @@ export default {
     subText: '#7C7C7C',
     placeholder: '#7c7c7c',
 
+    box: '#e5e5e5',
     buttonText: '#FDFDFD',
     buttonGreyBorderColor: '#DCDCDC',
     themeSwitcher: '#121212',

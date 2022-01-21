@@ -17,6 +17,6 @@ export const SearchInputContainer = styled.View`
   height: ${RFValue(48)}px;
 
   padding: 0 ${RFValue(16)}px;
-  background-color: ${({ theme }) => theme.colors.buttonGreyBorderColor};
+  background-color: ${({ theme }) => theme.colors.box};
   border-radius: ${RFValue(8)}px;
 `;

@@ -10,13 +10,14 @@ export default {
 
     background: '#121212',
     title: '#fdfdfd',
-    text: '#565656',
+    text: '#E5E5E5',
     subText: '#7C7C7C',
     placeholder: '#565656',
 
+    box: '#232323',
     buttonText: '#FDFDFD',
     buttonGreyBorderColor: '#DCDCDC',
-    themeSwitcher: '#FDFDFD',
+    themeSwitcher: '#fdfdfd',
   },
 
   fonts: {

@@ -18,13 +18,13 @@ export const AssetInfo = styled.View``;
 
 export const AssetName = styled.Text`
   font-size: ${RFValue(16)}px;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.title};
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
 export const AssetSector = styled.Text`
   font-size: ${RFValue(10)}px;
-  color: ${({ theme }) => theme.colors.subText};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const AssetLogo = styled(SvgUri)`

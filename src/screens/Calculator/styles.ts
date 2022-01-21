@@ -34,7 +34,8 @@ export const DividendWantedValueInputField = styled(CurrencyInput)`
   text-align: center;
 
   padding: ${RFValue(8)}px ${RFValue(16)}px;
-  background-color: ${({ theme }) => theme.colors.buttonGreyBorderColor};
+  background-color: ${({ theme }) => theme.colors.box};
+  color: ${({ theme }) => theme.colors.text};
   border-radius: ${RFValue(8)}px;
   margin-bottom: ${RFValue(24)}px;
 `;
@@ -50,7 +51,8 @@ export const DividendWantedResultMoney = styled.Text`
   text-align: center;
 
   padding: ${RFValue(12)}px;
-  background-color: ${({ theme }) => theme.colors.buttonGreyBorderColor};
+  background-color: ${({ theme }) => theme.colors.box};
+  color: ${({ theme }) => theme.colors.text};
   border-radius: ${RFValue(8)}px;
 `;
 
@@ -63,7 +65,8 @@ export const StockCount = styled.Text`
   text-align: center;
 
   padding: ${RFValue(12)}px;
-  background-color: ${({ theme }) => theme.colors.buttonGreyBorderColor};
+  background-color: ${({ theme }) => theme.colors.box};
+  color: ${({ theme }) => theme.colors.text};
   border-radius: ${RFValue(8)}px;
 `;
 

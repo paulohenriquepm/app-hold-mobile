@@ -45,7 +45,7 @@ export const FilterTextsContainer = styled.View`
 
 export const FilterCountResults = styled.Text`
   font-size: ${RFValue(10)}px;
-  color: ${({ theme }) => theme.colors.placeholder};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const ResetFilterText = styled.Text`

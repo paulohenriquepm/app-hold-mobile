@@ -45,6 +45,7 @@ export const FormInputContainer = styled.View`
 export const SignInContainer = styled.View`
   margin-top: ${RFValue(48)}px;
   flex-direction: row;
+  height: ${RFValue(48)}px;
 
   align-items: center;
   justify-content: center;
@@ -52,6 +53,12 @@ export const SignInContainer = styled.View`
 
 export const AlreadyOnAppHoldText = styled.Text`
   color: ${({ theme }) => theme.colors.text};
+`;
+
+export const SignInTextContainer = styled.TouchableOpacity`
+  height: 100%;
+  justify-content: center;
+  margin-left: ${RFValue(4)}px;
 `;
 
 export const SignInText = styled.Text`

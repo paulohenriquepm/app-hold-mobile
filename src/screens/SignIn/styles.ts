@@ -56,6 +56,7 @@ export const ForgotPasswordText = styled.Text`
 export const SignUpContainer = styled.View`
   margin-top: ${RFValue(48)}px;
   flex-direction: row;
+  height: ${RFValue(48)}px;
 
   align-items: center;
   justify-content: center;
@@ -65,8 +66,13 @@ export const NewToAppHoldText = styled.Text`
   color: ${({ theme }) => theme.colors.text};
 `;
 
-export const SignUpText = styled.Text`
+export const SignUpTextContainer = styled.TouchableOpacity`
+  height: 100%;
+  justify-content: center;
   margin-left: ${RFValue(4)}px;
+`;
+
+export const SignUpText = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
   font-family: ${({ theme }) => theme.fonts.bold};
 `;

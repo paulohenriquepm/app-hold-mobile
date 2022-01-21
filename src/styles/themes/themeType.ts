@@ -12,6 +12,7 @@ type ThemeType = {
     subText: string;
     placeholder: string;
 
+    box: string;
     buttonText: string;
     buttonGreyBorderColor: string;
     themeSwitcher: string;

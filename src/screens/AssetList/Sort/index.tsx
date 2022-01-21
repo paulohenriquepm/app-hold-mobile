@@ -5,6 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 import { Icon } from '../../../components/Icon';
 import { Title } from '../../../components/Title';
 import { AppButton } from '../../../components/AppButton';
+import { useThemeContext } from '../../../context/theme';
 
 import {
   Container,
@@ -54,6 +55,8 @@ const Sort = ({
     currentSort.orderByDirection,
   );
 
+  const { currentTheme } = useThemeContext();
+
   const handleSort = useCallback(() => {
     setSort({
       orderByField: selectedOrderByField,
@@ -71,7 +74,7 @@ const Sort = ({
     >
       <Container>
         <CloseModalButton onPress={toggleModal}>
-          <Icon name="close" />
+          <Icon name="close" color={currentTheme.colors.themeSwitcher} />
         </CloseModalButton>
         <Content>
           <SortOptionsContainer>
@@ -110,10 +113,11 @@ const Sort = ({
                         ? 'radio-button-checked'
                         : 'radio-button-unchecked'
                     }
+                    color={currentTheme.colors.text}
                   />
                   <OrderDirectionItemTextContainer>
                     <OrderDirectionItemText>Crescente</OrderDirectionItemText>
-                    <Icon name="north" />
+                    <Icon name="north" color={currentTheme.colors.text} />
                   </OrderDirectionItemTextContainer>
                 </OrderDirectionItem>
                 <OrderDirectionItem
@@ -125,10 +129,11 @@ const Sort = ({
                         ? 'radio-button-checked'
                         : 'radio-button-unchecked'
                     }
+                    color={currentTheme.colors.text}
                   />
                   <OrderDirectionItemTextContainer>
                     <OrderDirectionItemText>Decrescente</OrderDirectionItemText>
-                    <Icon name="south" />
+                    <Icon name="south" color={currentTheme.colors.text} />
                   </OrderDirectionItemTextContainer>
                 </OrderDirectionItem>
               </OrderDirectionsContainer>

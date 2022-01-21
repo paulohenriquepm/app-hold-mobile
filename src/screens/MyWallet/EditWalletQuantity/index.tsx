@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import { Icon } from '../../../components/Icon';
 import { Title } from '../../../components/Title';
 import { AppButton } from '../../../components/AppButton';
+import { useThemeContext } from '../../../context/theme';
 
 import { IWalletAsset } from '..';
 
@@ -32,6 +33,8 @@ const EditWalletQuantity: React.FC<EditWalletQuantityProps> = ({
 }) => {
   const [newQuantity, setNewQuantity] = useState(assetToEdit.quantity);
 
+  const { currentTheme } = useThemeContext();
+
   return (
     <Modal
       isVisible={isVisible}
@@ -41,7 +44,7 @@ const EditWalletQuantity: React.FC<EditWalletQuantityProps> = ({
     >
       <Container>
         <CloseModalButton onPress={toggleModal}>
-          <Icon name="close" />
+          <Icon name="close" color={currentTheme.colors.themeSwitcher} />
         </CloseModalButton>
         <Content>
           <Header>
@@ -58,6 +61,7 @@ const EditWalletQuantity: React.FC<EditWalletQuantityProps> = ({
               rounded
               totalHeight={48}
               iconSize={16}
+              textColor={currentTheme.colors.themeSwitcher}
             />
           </QuantityContainer>
           <AppButton
