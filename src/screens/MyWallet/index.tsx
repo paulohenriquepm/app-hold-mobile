@@ -159,10 +159,10 @@ const MyWallet = () => {
   );
 
   const handleOpenDeleteAssetAlertDialog = useCallback(
-    (user_wallet_asset_id: number) => {
+    (user_wallet_asset_id: number, user_wallet_asset_ticket: string) => {
       Alert.alert(
         'Atenção!',
-        'Deseja realmente excluir WEGE3 de sua carteira?',
+        `Deseja realmente excluir ${user_wallet_asset_ticket} de sua carteira?`,
         [
           {
             text: 'Não',
@@ -234,33 +234,35 @@ const MyWallet = () => {
           </WalletAssetsListHeader>
 
           <WalletAssetsListBody>
-            {wallet.map((asset: IWalletAsset) => (
-              <WalletAssetsListBodyItem key={asset.id}>
+            {wallet.map((walletAsset: IWalletAsset) => (
+              <WalletAssetsListBodyItem key={walletAsset.id}>
                 <WalletAssetListBodyItemAssetText>
-                  {asset.asset.b3_ticket}
+                  {walletAsset.asset.b3_ticket}
                 </WalletAssetListBodyItemAssetText>
                 <WalletAssetListBodyItemQuantityContainer
-                  onPress={() => handleOpenShowEditWalletQuantityModal(asset)}
+                  onPress={() =>
+                    handleOpenShowEditWalletQuantityModal(walletAsset)
+                  }
                 >
                   <WalletAssetListBodyItemQuantityText>
-                    {asset.quantity}
+                    {walletAsset.quantity}
                   </WalletAssetListBodyItemQuantityText>
 
                   <EditIcon name="edit" />
                 </WalletAssetListBodyItemQuantityContainer>
                 <WalletAssetListBodyItemPatrimonyText>
-                  {asset.patrimony}
+                  {walletAsset.patrimony}
                 </WalletAssetListBodyItemPatrimonyText>
                 <WalletAssetListBodyItemTotalText>
-                  {asset.patrimonyInPercentage}
+                  {walletAsset.patrimonyInPercentage}
                 </WalletAssetListBodyItemTotalText>
                 <TrashIconContainer
-                  onPress={() => handleOpenDeleteAssetAlertDialog(asset.id)}
-                >
-                  <TrashIcon name="delete" />
-                </TrashIconContainer>
-                <TrashIconContainer
-                  onPress={() => handleOpenDeleteAssetAlertDialog(asset.id)}
+                  onPress={() =>
+                    handleOpenDeleteAssetAlertDialog(
+                      walletAsset.id,
+                      walletAsset.asset.b3_ticket,
+                    )
+                  }
                 >
                   <TrashIcon name="delete" />
                 </TrashIconContainer>

@@ -62,6 +62,8 @@ const AssetList = () => {
     useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const [isFilteredByNameOrTicket, setIsFilteredByNameOrTicket] =
+    useState(false);
 
   const [assetList, setAssetList] = useState<IAsset[]>([] as IAsset[]);
   const [filters, setFilters] = useState<IFilterAsset>({} as IFilterAsset);
@@ -123,7 +125,7 @@ const AssetList = () => {
 
   async function loadInfiniteAssets() {
     try {
-      if (!nextCursorId) return;
+      if (!nextCursorId || isFilteredByNameOrTicket) return;
 
       setLoading(true);
 
@@ -197,6 +199,7 @@ const AssetList = () => {
                 accessibilityLabel="buscar por ativo por nome ou ticket"
                 setFilteredAssets={setAssetList}
                 shouldClearOnEmpty={false}
+                setIsFilteredByNameOrTicket={setIsFilteredByNameOrTicket}
               />
             </FilterInputContainer>
 

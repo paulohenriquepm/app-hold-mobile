@@ -347,7 +347,7 @@ const AssetDetails = () => {
             <Field>
               <View>
                 <FieldTitle>Valor de Mercado</FieldTitle>
-                <FieldValue>{asset.market_value} (valor em milhões)</FieldValue>
+                <FieldValue>{asset.market_value}</FieldValue>
               </View>
 
               <View>
@@ -390,8 +390,8 @@ const AssetDetails = () => {
             <PickerContainer
               selectedValue={selectedPeriod.period}
               onValueChange={(value: string) =>
-                setSelectedPeriod({
-                  ...selectedPeriod,
+                changeSeasonalityData({
+                  annually: selectedPeriod.annually,
                   period: value,
                 })
               }

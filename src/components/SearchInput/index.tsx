@@ -17,11 +17,13 @@ interface IFilterAssetResponse {
 interface IAssetSearchInputFieldProps extends ViewProps {
   setFilteredAssets: Dispatch<SetStateAction<IAsset[]>>;
   shouldClearOnEmpty?: boolean;
+  setIsFilteredByNameOrTicket?: Dispatch<SetStateAction<boolean>>;
   onlyAssetsThatCanCalculateDividend?: number;
 }
 
 const SearchInput = ({
   setFilteredAssets,
+  setIsFilteredByNameOrTicket,
   shouldClearOnEmpty = true,
   onlyAssetsThatCanCalculateDividend = 0,
   ...rest
@@ -33,6 +35,7 @@ const SearchInput = ({
   const filterAssets = useCallback(
     async (nameOrTicket: string) => {
       if (nameOrTicket === '' && shouldClearOnEmpty) {
+        if (setIsFilteredByNameOrTicket) setIsFilteredByNameOrTicket(false);
         setFilteredAssets([]);
 
         return;
@@ -63,8 +66,14 @@ const SearchInput = ({
 
       setFilteredAssets(mappedFilteredAssets);
       setLoading(false);
+      if (setIsFilteredByNameOrTicket) setIsFilteredByNameOrTicket(true);
     },
-    [setFilteredAssets, shouldClearOnEmpty, onlyAssetsThatCanCalculateDividend],
+    [
+      setIsFilteredByNameOrTicket,
+      setFilteredAssets,
+      shouldClearOnEmpty,
+      onlyAssetsThatCanCalculateDividend,
+    ],
   );
 
   return (
