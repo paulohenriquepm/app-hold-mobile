@@ -1,0 +1,23 @@
+{
+  "cli": {
+    "version": ">= 0.46.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./1034211813260-158bc75af825.json",
+        "track": "production"
+      }
+    }
+  }
+}

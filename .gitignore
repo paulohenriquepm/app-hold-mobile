@@ -10,6 +10,7 @@ npm-debug.*
 *.orig.*
 web-build/
 .env
+1034211813260-158bc75af825.json
 
 # macOS
 .DS_Store
