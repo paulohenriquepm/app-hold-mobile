@@ -1,10 +1,11 @@
 import React, { useCallback, useState, Dispatch, SetStateAction } from 'react';
+import { Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
 import { Picker } from '@react-native-picker/picker';
 
 import { Icon } from '../../../components/Icon';
 import { Title } from '../../../components/Title';
-import { AppButton } from '../../../components/AppButton';
+import { AppButtonOpacity } from '../../../components/AppButtonOpacity';
 import { useThemeContext } from '../../../context/theme';
 
 import {
@@ -15,7 +16,6 @@ import {
   SortOptionsContainer,
   SortTitle,
   SortItem,
-  PickerWrapper,
   PickerContainer,
   OrderDirectionsContainer,
   OrderDirectionItem,
@@ -55,6 +55,8 @@ const Sort = ({
     currentSort.orderByDirection,
   );
 
+  const deviceHeight = Dimensions.get('screen').height;
+
   const { currentTheme } = useThemeContext();
 
   const handleSort = useCallback(() => {
@@ -69,8 +71,9 @@ const Sort = ({
     <Modal
       isVisible={isVisible}
       propagateSwipe
-      coverScreen={false}
       onBackdropPress={toggleModal}
+      deviceHeight={deviceHeight}
+      onBackButtonPress={toggleModal}
     >
       <Container>
         <CloseModalButton onPress={toggleModal}>
@@ -84,22 +87,20 @@ const Sort = ({
 
             <SortItem>
               <SortTitle>Ordernar por</SortTitle>
-              <PickerWrapper>
-                <PickerContainer
-                  selectedValue={selectedOrderByField}
-                  onValueChange={(value: string) =>
-                    setSelectedOrderByField(value)
-                  }
-                >
-                  {sortOptions.map((option: ISortOptions) => (
-                    <Picker.Item
-                      key={option.value}
-                      label={option.label}
-                      value={option.value}
-                    />
-                  ))}
-                </PickerContainer>
-              </PickerWrapper>
+              <PickerContainer
+                selectedValue={selectedOrderByField}
+                onValueChange={(value: string) =>
+                  setSelectedOrderByField(value)
+                }
+              >
+                {sortOptions.map((option: ISortOptions) => (
+                  <Picker.Item
+                    key={option.value}
+                    label={option.label}
+                    value={option.value}
+                  />
+                ))}
+              </PickerContainer>
             </SortItem>
             <SortItem>
               <SortTitle>Ordernar de forma</SortTitle>
@@ -140,9 +141,9 @@ const Sort = ({
             </SortItem>
           </SortOptionsContainer>
 
-          <AppButton title="ordernar" onPress={handleSort}>
+          <AppButtonOpacity title="ordernar" onPress={handleSort}>
             Aplicar ordenação
-          </AppButton>
+          </AppButtonOpacity>
         </Content>
       </Container>
     </Modal>

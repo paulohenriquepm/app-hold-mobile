@@ -272,6 +272,7 @@ const MyWallet = () => {
         </WalletAssetsListContainer>
 
         <AppButton
+          accessibilityLabel="botão de adicionar ativo"
           title="adicionar"
           onPress={() => setShowAddToWalletSearching(true)}
         >

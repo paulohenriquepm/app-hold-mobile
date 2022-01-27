@@ -40,6 +40,7 @@ const EditWalletQuantity: React.FC<EditWalletQuantityProps> = ({
       isVisible={isVisible}
       propagateSwipe
       onBackdropPress={toggleModal}
+      onBackButtonPress={toggleModal}
       coverScreen={false}
     >
       <Container>

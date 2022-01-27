@@ -3,7 +3,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { Picker } from '@react-native-picker/picker';
 
 export const Container = styled.View`
-  height: 90%;
+  height: 100%;
   width: 100%;
   padding: ${RFValue(24)}px;
 
@@ -43,12 +43,7 @@ export const SortTitle = styled.Text`
   color: ${({ theme }) => theme.colors.title};
 `;
 
-export const SortItem = styled.View``;
-
-export const PickerWrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.box};
-  padding: ${RFValue(4)}px;
-  border-radius: ${RFValue(10)}px;
+export const SortItem = styled.View`
   margin-bottom: ${RFValue(16)}px;
 `;
 

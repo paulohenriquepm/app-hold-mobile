@@ -54,6 +54,12 @@ const Calculator = () => {
     [selectedAsset],
   );
 
+  const clearInputs = useCallback(() => {
+    setDividendWantedValue(0);
+    setTotalAmountToBuy('');
+    setTotalAmountToBuyInStocks('');
+  }, []);
+
   const handleDividendWanted = useCallback(
     dividendValue => {
       setDividendWantedValue(dividendValue);
@@ -75,6 +81,7 @@ const Calculator = () => {
           top={100}
           setSelectedAsset={setSelectedAsset}
           onlyAssetsThatCanCalculateDividend={1}
+          functionToExecute={clearInputs}
         />
 
         {Object.keys(selectedAsset).length > 0 && (
@@ -93,7 +100,7 @@ const Calculator = () => {
               />
             </DividendWantedContainer>
 
-            {totalAmountToBuy !== '' && totalAmountToBuy !== '' && (
+            {totalAmountToBuy !== '' && totalAmountToBuyInStocks !== '' && (
               <DividendWantedResultContainer>
                 <SubTitle>Você irá precisar investir cerca de:</SubTitle>
                 <DividendWantedResultMoney>

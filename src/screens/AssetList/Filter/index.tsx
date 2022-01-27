@@ -5,7 +5,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
 import { Picker } from '@react-native-picker/picker';
 
@@ -13,7 +13,7 @@ import { Icon } from '../../../components/Icon';
 import { Title } from '../../../components/Title';
 import { api } from '../../../api/api';
 import { LoadingScreen } from '../../../components/LoadingScreen';
-import { AppButton } from '../../../components/AppButton';
+import { AppButtonOpacity } from '../../../components/AppButtonOpacity';
 import { useThemeContext } from '../../../context/theme';
 
 import {
@@ -24,7 +24,6 @@ import {
   FiltersContainer,
   FilterTitle,
   FilterItem,
-  PickerWrapper,
   PickerContainer,
 } from './styles';
 
@@ -48,6 +47,8 @@ const Filter = ({
   const [industries, setIndustries] = useState<string[]>([]);
   const [selectedFilters, setSelectedFilters] =
     useState<IFilterAsset>(currentFilter);
+
+  const deviceHeight = Dimensions.get('screen').height;
 
   const { currentTheme } = useThemeContext();
 
@@ -87,8 +88,9 @@ const Filter = ({
     <Modal
       isVisible={isVisible}
       propagateSwipe
-      coverScreen={false}
       onBackdropPress={toggleModal}
+      deviceHeight={deviceHeight}
+      onBackButtonPress={toggleModal}
     >
       <Container>
         <CloseModalButton onPress={toggleModal}>
@@ -102,60 +104,56 @@ const Filter = ({
 
             <FilterItem>
               <FilterTitle>Setor</FilterTitle>
-              <PickerWrapper>
-                <PickerContainer
-                  selectedValue={selectedFilters.sector}
-                  onValueChange={(value: string) =>
-                    setSelectedFilters({
-                      ...selectedFilters,
-                      sector: value,
-                    })
-                  }
-                >
-                  <Picker.Item
-                    key="placeholder"
-                    label="Selecione um setor"
-                    value=""
-                  />
-                  {sectors.map((sector: string) => (
-                    <Picker.Item key={sector} label={sector} value={sector} />
-                  ))}
-                </PickerContainer>
-              </PickerWrapper>
+              <PickerContainer
+                selectedValue={selectedFilters.sector}
+                onValueChange={(value: string) =>
+                  setSelectedFilters({
+                    ...selectedFilters,
+                    sector: value,
+                  })
+                }
+              >
+                <Picker.Item
+                  key="placeholder"
+                  label="Selecione um setor"
+                  value=""
+                />
+                {sectors.map((sector: string) => (
+                  <Picker.Item key={sector} label={sector} value={sector} />
+                ))}
+              </PickerContainer>
             </FilterItem>
 
             <FilterItem>
               <FilterTitle>Indústria</FilterTitle>
-              <PickerWrapper>
-                <PickerContainer
-                  selectedValue={selectedFilters.industry}
-                  onValueChange={(value: string) =>
-                    setSelectedFilters({
-                      ...selectedFilters,
-                      industry: value,
-                    })
-                  }
-                >
+              <PickerContainer
+                selectedValue={selectedFilters.industry}
+                onValueChange={(value: string) =>
+                  setSelectedFilters({
+                    ...selectedFilters,
+                    industry: value,
+                  })
+                }
+              >
+                <Picker.Item
+                  key="placeholder"
+                  label="Selecione uma indústria"
+                  value=""
+                />
+                {industries.map((industry: string) => (
                   <Picker.Item
-                    key="placeholder"
-                    label="Selecione uma indústria"
-                    value=""
+                    key={industry}
+                    label={industry}
+                    value={industry}
                   />
-                  {industries.map((industry: string) => (
-                    <Picker.Item
-                      key={industry}
-                      label={industry}
-                      value={industry}
-                    />
-                  ))}
-                </PickerContainer>
-              </PickerWrapper>
+                ))}
+              </PickerContainer>
             </FilterItem>
           </FiltersContainer>
 
-          <AppButton title="filtrar" onPress={handleFilter}>
+          <AppButtonOpacity title="filtrar" onPress={handleFilter}>
             Aplicar filtros
-          </AppButton>
+          </AppButtonOpacity>
         </Content>
       </Container>
     </Modal>

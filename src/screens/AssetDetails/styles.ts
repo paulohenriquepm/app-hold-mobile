@@ -86,16 +86,10 @@ export const SeasonalityContainer = styled.View`
   margin-bottom: ${RFValue(8)}px;
 `;
 
-export const PickerWrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.primary};
-  padding: ${RFValue(4)}px;
-  border-radius: ${RFValue(8)}px;
-  margin-bottom: ${RFValue(16)}px;
-`;
-
 export const PickerContainer = styled(Picker)`
   background-color: ${({ theme }) => theme.colors.primary};
   height: ${RFValue(40)}px;
+  margin-bottom: ${RFValue(16)}px;
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.colors.buttonText};

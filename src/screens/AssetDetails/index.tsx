@@ -28,7 +28,6 @@ import {
   FieldTitle,
   FieldValue,
   SeasonalityContainer,
-  PickerWrapper,
   PickerContainer,
   AddToWalletContainer,
 } from './styles';
@@ -386,28 +385,26 @@ const AssetDetails = () => {
             </AppButton>
           </SeasonalityContainer>
 
-          <PickerWrapper>
-            <PickerContainer
-              selectedValue={selectedPeriod.period}
-              onValueChange={(value: string) =>
-                changeSeasonalityData({
-                  annually: selectedPeriod.annually,
-                  period: value,
-                })
-              }
-            >
-              {(selectedPeriod.annually
-                ? filterYearPeriods
-                : filterQuarterPeriods
-              ).map((filterPeriod: IFilterPeriod) => (
-                <Picker.Item
-                  key={filterPeriod.value}
-                  label={filterPeriod.label}
-                  value={filterPeriod.value}
-                />
-              ))}
-            </PickerContainer>
-          </PickerWrapper>
+          <PickerContainer
+            selectedValue={selectedPeriod.period}
+            onValueChange={(value: string) =>
+              changeSeasonalityData({
+                annually: selectedPeriod.annually,
+                period: value,
+              })
+            }
+          >
+            {(selectedPeriod.annually
+              ? filterYearPeriods
+              : filterQuarterPeriods
+            ).map((filterPeriod: IFilterPeriod) => (
+              <Picker.Item
+                key={filterPeriod.value}
+                label={filterPeriod.label}
+                value={filterPeriod.value}
+              />
+            ))}
+          </PickerContainer>
 
           <AssetFinancialContainer>
             <AssetFinancialScrollView>

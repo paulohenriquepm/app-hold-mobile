@@ -58,7 +58,12 @@ const AddToWallet: React.FC<AddToWalletProps> = ({
   }, [selectedAsset, user]);
 
   return (
-    <Modal isVisible={isVisible} propagateSwipe onBackdropPress={toggleModal}>
+    <Modal
+      isVisible={isVisible}
+      propagateSwipe
+      onBackdropPress={toggleModal}
+      onBackButtonPress={toggleModal}
+    >
       <Container>
         <CloseModalButton onPress={toggleModal}>
           <Icon name="close" color={currentTheme.colors.themeSwitcher} />

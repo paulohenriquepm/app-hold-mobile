@@ -15,8 +15,7 @@
   "submit": {
     "production": {
       "android": {
-        "serviceAccountKeyPath": "./1034211813260-158bc75af825.json",
-        "track": "production"
+        "serviceAccountKeyPath": "./1034211813260-158bc75af825.json"
       }
     }
   }

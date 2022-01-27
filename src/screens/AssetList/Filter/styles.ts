@@ -3,7 +3,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { Picker } from '@react-native-picker/picker';
 
 export const Container = styled.View`
-  height: 95%;
+  height: 100%;
   width: 100%;
   padding: ${RFValue(24)}px;
 
@@ -46,13 +46,6 @@ export const FilterTitle = styled.Text`
 export const FilterItem = styled.View`
   height: ${RFValue(48)}px;
   margin-bottom: ${RFValue(48)}px;
-`;
-
-export const PickerWrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.box};
-  padding: ${RFValue(4)}px;
-  border-radius: ${RFValue(10)}px;
-  margin-bottom: ${RFValue(16)}px;
 `;
 
 export const PickerContainer = styled(Picker)`
