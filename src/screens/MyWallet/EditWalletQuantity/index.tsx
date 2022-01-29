@@ -52,9 +52,8 @@ const EditWalletQuantity: React.FC<EditWalletQuantityProps> = ({
             <Title>Alterar Quantidade</Title>
           </Header>
 
-          <AssetName>{assetToEdit.asset.b3_ticket}</AssetName>
-
           <QuantityContainer>
+            <AssetName>{assetToEdit.asset.b3_ticket}</AssetName>
             <Quantity
               minValue={1}
               value={newQuantity}

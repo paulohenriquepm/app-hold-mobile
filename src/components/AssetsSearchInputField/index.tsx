@@ -12,6 +12,7 @@ interface IAssetSearchInputFieldProps extends ViewProps {
   top: number;
   onlyAssetsThatCanCalculateDividend?: number;
   functionToExecute?: () => void;
+  shouldLoadAgain?: boolean;
 }
 
 const AssetsSearchInputField = ({
@@ -22,12 +23,14 @@ const AssetsSearchInputField = ({
   ...rest
 }: IAssetSearchInputFieldProps) => {
   const [filteredAssets, setFilteredAssets] = useState<IAsset[]>([]);
+  const [shouldLoadAgain, setShouldLoadAgain] = useState(true);
 
   const handleSelectAsset = useCallback(
     (asset: IAsset) => {
       setSelectedAsset(asset);
 
       setFilteredAssets([]);
+      setShouldLoadAgain(false);
       if (functionToExecute) {
         functionToExecute();
       }
@@ -40,6 +43,8 @@ const AssetsSearchInputField = ({
       <SearchInput
         setFilteredAssets={setFilteredAssets}
         onlyAssetsThatCanCalculateDividend={onlyAssetsThatCanCalculateDividend}
+        shouldLoadAgain={shouldLoadAgain}
+        setShouldLoadAgain={setShouldLoadAgain}
       />
       {filteredAssets.length > 0 && (
         <ResultsContainer>

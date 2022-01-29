@@ -19,6 +19,8 @@ interface IAssetSearchInputFieldProps extends ViewProps {
   shouldClearOnEmpty?: boolean;
   setIsFilteredByNameOrTicket?: Dispatch<SetStateAction<boolean>>;
   onlyAssetsThatCanCalculateDividend?: number;
+  shouldLoadAgain?: boolean;
+  setShouldLoadAgain?: Dispatch<SetStateAction<boolean>>;
 }
 
 const SearchInput = ({
@@ -26,6 +28,8 @@ const SearchInput = ({
   setIsFilteredByNameOrTicket,
   shouldClearOnEmpty = true,
   onlyAssetsThatCanCalculateDividend = 0,
+  shouldLoadAgain = true,
+  setShouldLoadAgain,
   ...rest
 }: IAssetSearchInputFieldProps) => {
   const [loading, setLoading] = useState(false);
@@ -34,6 +38,8 @@ const SearchInput = ({
 
   const filterAssets = useCallback(
     async (nameOrTicket: string) => {
+      if (!shouldLoadAgain) return;
+
       if (nameOrTicket === '' && shouldClearOnEmpty) {
         if (setIsFilteredByNameOrTicket) setIsFilteredByNameOrTicket(false);
         setFilteredAssets([]);
@@ -73,6 +79,7 @@ const SearchInput = ({
       setFilteredAssets,
       shouldClearOnEmpty,
       onlyAssetsThatCanCalculateDividend,
+      shouldLoadAgain,
     ],
   );
 
@@ -84,6 +91,9 @@ const SearchInput = ({
         delayTimeout={500}
         placeholder="Ex: Weg ou WEGE3"
         placeholderTextColor={colors.text}
+        onFocus={() => {
+          if (setShouldLoadAgain) setShouldLoadAgain(true);
+        }}
       />
       {loading ? (
         <ActivityIndicator size="small" color={colors.themeSwitcher} />

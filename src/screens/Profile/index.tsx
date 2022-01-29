@@ -36,6 +36,7 @@ interface IFormData {
 const schema = Yup.object().shape({
   name: Yup.string().required('Nome obrigatório'),
   email: Yup.string()
+    .trim()
     .email('Digite um e-mail válido')
     .required('E-mail obrigatório'),
   old_password: Yup.string(),

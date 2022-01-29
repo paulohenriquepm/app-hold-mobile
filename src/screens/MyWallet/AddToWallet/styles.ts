@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-export const Container = styled.View`
-  height: 50%;
+export const Container = styled.KeyboardAvoidingView`
   width: 100%;
   padding: ${RFValue(24)}px;
+  flex: 1;
 
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: ${RFValue(8)}px;

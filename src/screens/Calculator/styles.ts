@@ -2,8 +2,8 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import CurrencyInput from 'react-native-currency-input';
 
-export const Container = styled.View`
-  height: 100%;
+export const Container = styled.KeyboardAvoidingView`
+  height: 100%
   width: 100%;
   padding: ${RFValue(48)}px ${RFValue(40)}px ${RFValue(32)}px ${RFValue(40)}px;
 

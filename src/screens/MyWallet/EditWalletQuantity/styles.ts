@@ -4,6 +4,7 @@ import NumericInput from 'react-native-numeric-input';
 
 export const Container = styled.View`
   width: 100%;
+  height: 50%;
   padding: ${RFValue(24)}px;
 
   background-color: ${({ theme }) => theme.colors.background};
@@ -13,6 +14,10 @@ export const Container = styled.View`
 export const Content = styled.ScrollView.attrs({
   keyboardShouldPersistTaps: 'handled',
   showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },
 })``;
 
 export const CloseModalButton = styled.TouchableOpacity`
@@ -27,7 +32,6 @@ export const CloseModalButton = styled.TouchableOpacity`
 
 export const Header = styled.View`
   margin-top: ${RFValue(16)}px;
-  margin-bottom: ${RFValue(16)}px;
 `;
 
 export const AssetName = styled.Text`
@@ -37,8 +41,6 @@ export const AssetName = styled.Text`
   margin-bottom: ${RFValue(8)}px;
 `;
 
-export const QuantityContainer = styled.View`
-  margin-bottom: ${RFValue(16)}px;
-`;
+export const QuantityContainer = styled.View``;
 
 export const Quantity = styled(NumericInput)``;

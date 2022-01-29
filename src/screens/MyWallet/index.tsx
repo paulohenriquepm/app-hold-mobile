@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { RefreshControl, Alert, Text } from 'react-native';
+import { RefreshControl, Alert } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { AppButton } from '../../components/AppButton';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
@@ -116,6 +117,32 @@ const MyWallet = () => {
 
     loadWallet();
   }, [user, refreshing]);
+
+  useFocusEffect(
+    useCallback(() => {
+      const loadWalletData = async () => {
+        const response = await api.get(`users-wallet-assets/${user.wallet.id}`);
+
+        const formattedWallet = response.data.map(
+          (walletAsset: IWalletAsset) => ({
+            ...walletAsset,
+            patrimony: new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(walletAsset.quantity * walletAsset.asset.price),
+            patrimonyInPercentage: calculatePatrimonyInPercentage(
+              response.data,
+              walletAsset,
+            ),
+          }),
+        );
+
+        setWallet(formattedWallet);
+      };
+
+      loadWalletData();
+    }, [user]),
+  );
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

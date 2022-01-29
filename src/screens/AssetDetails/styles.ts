@@ -5,7 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 export const Container = styled.View`
   height: 100%;
   width: 100%;
-  padding: ${RFValue(48)}px ${RFValue(40)}px ${RFValue(32)}px ${RFValue(40)}px;
+  padding: ${RFValue(56)}px ${RFValue(40)}px ${RFValue(32)}px ${RFValue(40)}px;
 
   background-color: ${({ theme }) => theme.colors.background};
 `;
@@ -95,4 +95,6 @@ export const PickerContainer = styled(Picker)`
   color: ${({ theme }) => theme.colors.buttonText};
 `;
 
-export const AddToWalletContainer = styled.View``;
+export const AddToWalletContainer = styled.View`
+  margin-top: ${RFValue(16)}px;
+`;
